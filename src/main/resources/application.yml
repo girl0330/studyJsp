@@ -1,22 +1,22 @@
 spring:
-  # Mysql ??
+  # Mysql
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name:
     url: jdbc:mysql://localhost:3306/jspStudy
     username: root
     password: root
 
-  # JSP??
+  # JSP
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
 
-# Mybatis ??
+# Mybatis
 mybatis:
-  # mapper location - ?? ? xml ??? ?????.
+  # mapper location
   mapper-locations: classpath:mappers/*/*.xml
-  # column name to camel case - ?? ?? ???? CamelCase? ?? ??? ???.
+  # column name to camel case
   configuration:
     map-underscore-to-camel-case: true
 

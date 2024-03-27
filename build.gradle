@@ -27,9 +27,9 @@ dependencies {
 
     //mybatis 설정
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+
     //mysql 설정
     //runtimeOnly 'com.mysql:mysql-connector-j'
-
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'mysql:mysql-connector-java'
 
@@ -37,6 +37,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
     //mybatis
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.2'
     
