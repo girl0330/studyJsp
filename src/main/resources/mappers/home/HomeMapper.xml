@@ -16,4 +16,72 @@
             board_info
     </select>
 
+    <select id="homeList1" resultType="com.march.studyjsp.home.HomeDTO1">
+        SELECT
+            row_number() over(order by id desc) as num
+	         , id
+             , title
+             , content
+             , system_registrar_id
+             , system_updater_id
+             , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
+             , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
+        FROM
+            board_info
+    </select>
+
+    <select id="homeList2" resultType="Map">
+        SELECT
+            row_number() over(order by id desc) as num
+	         , id
+             , title
+             , content
+             , system_registrar_id
+             , system_updater_id
+             , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
+             , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
+        FROM
+            board_info
+    </select>
+
+    <select id="homeList3" resultType="com.march.studyjsp.home.HomeDTO">
+        SELECT
+            row_number() over(order by id desc) as num
+	         , id
+             , title
+             , content
+             , system_registrar_id
+             , system_updater_id
+             , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
+             , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
+        FROM
+            board_info
+    </select>
+
+    <select id="homeList4" resultType="Map">
+        SELECT
+            row_number() over(order by id desc) as num
+	         , id
+             , title
+             , content
+             , system_registrar_id
+             , system_updater_id
+             , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
+             , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
+        FROM
+            new_board
+    </select>
+
+    <insert id="createBoard" parameterType="com.march.studyjsp.home.HomeDTO">
+        /*HomeMapper.createBoard*/
+        INSERT
+        INTO new_board(title,
+                       content,
+                       system_registrar_id,
+                       system_updater_id)
+        VALUES (#{title},
+                #{content},
+                #{systemRegistrarId},
+                #{systemUpdaterId})
+    </insert>
 </mapper>

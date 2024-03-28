@@ -20,4 +20,32 @@ public class HomeServiceImpl implements HomeService {
         return homeMapper.homeList();
     }
 
+    @Override
+    public List<HomeDTO1> homeList1() {
+        System.out.println("homeMapper.homeList11111111111111111111 = " + homeMapper.homeList1());
+        return homeMapper.homeList1();
+    }
+
+    @Override
+    public List<Map<String, Object>> homeList2() {
+        System.out.println("homeMapper222222222222222222222");
+        return homeMapper.homeList2();
+    }
+
+    @Override
+    public List<HomeDTO> homeList3() {
+        System.out.println("homeMapper 3333333333333333");
+        return homeMapper.homeList3();
+    }
+
+    @Override
+    public List<Map<String,Object>> homeList4() {
+        List<Map<String,Object>> list = homeMapper.homeList4();
+        return list;
+    }
+
+    @Override
+    public void createBoard(HomeDTO homeDTO) {
+        homeMapper.createBoard(homeDTO);
+    }
 }

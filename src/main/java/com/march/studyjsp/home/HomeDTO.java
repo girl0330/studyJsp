@@ -15,3 +15,4 @@ public class HomeDTO {
     private String systemUpdateDatetime;
 
 }
+
