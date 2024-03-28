@@ -3,9 +3,7 @@ package com.march.studyjsp.home;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +18,18 @@ public class HomeController {
         List<HomeDTO> list = homeService.homeList();
         System.out.println("list:::    "+list);
         model.addAttribute("list",list);
-        return "jsp/test";
+        return "jsp/index";
+    }
+
+    @GetMapping("/{param}")
+    public String testview(@PathVariable String param, Model model) {
+        System.out.println("param:::    "+param);
+        if("list".equals(param)) {
+            System.out.println("LIST인가요??");
+            List<HomeDTO> list = homeService.homeList();
+            model.addAttribute("list",list);
+        }
+        return "jsp/"+param;
     }
 
     @GetMapping("/1")
@@ -65,6 +74,21 @@ public class HomeController {
          */
         System.out.println("''''''''''''''''' "+homeDTO);
         homeService.createBoard(homeDTO);
+        return "jsp/test";
+    }
+
+
+    @PostMapping("/update/{id}")
+    public String updateBoard(@PathVariable Long id, @RequestBody HomeDTO homeDTO) {
+        System.out.println("--------------"+homeDTO);
+        homeService.updateBoard(homeDTO);
+        return "jsp/test";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteBoard(@PathVariable Long id) {
+        System.out.println("==================== "+id);
+        homeService.deleteBoard(id);
         return "jsp/test";
     }
 

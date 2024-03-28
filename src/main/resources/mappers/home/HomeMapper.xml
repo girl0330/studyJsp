@@ -84,4 +84,19 @@
                 #{systemRegistrarId},
                 #{systemUpdaterId})
     </insert>
+
+    <update id="updateBoard" parameterType="com.march.studyjsp.home.HomeDTO">
+        /*HomeMapper.updateBoard*/
+        UPDATE new_board
+        SET title               = #{title}
+          , system_registrar_id = #{systemRegistrarId}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteBoard" parameterType="Long">
+        /*HomdMapper.deleteReview*/
+        DELETE FROM new_board
+        WHERE id = #{id}
+    </delete>
+
 </mapper>

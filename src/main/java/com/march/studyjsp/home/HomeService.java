@@ -19,4 +19,8 @@ public interface HomeService {
 
     void createBoard(HomeDTO homeDTO);
 
+    void updateBoard(HomeDTO homeDTO);
+
+    void deleteBoard(Long id);
+
 }

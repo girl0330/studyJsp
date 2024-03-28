@@ -48,4 +48,14 @@ public class HomeServiceImpl implements HomeService {
     public void createBoard(HomeDTO homeDTO) {
         homeMapper.createBoard(homeDTO);
     }
+
+    @Override
+    public void updateBoard(HomeDTO homeDTO) {
+        homeMapper.updateBoard(homeDTO);
+    }
+
+    @Override
+    public void deleteBoard(Long id) {
+        homeMapper.deleteBoard(id);
+    }
 }

@@ -1,6 +1,7 @@
 package com.march.studyjsp.home;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -18,4 +19,8 @@ public interface HomeMapper {
     List<Map<String,Object>> homeList4();
 
     void createBoard(HomeDTO homeDTO);
+
+    void updateBoard(HomeDTO homeDTO);
+
+    void deleteBoard(Long id);
 }
