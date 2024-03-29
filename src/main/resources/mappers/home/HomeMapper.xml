@@ -99,4 +99,97 @@
         WHERE id = #{id}
     </delete>
 
+
+<!-- 복습 -->
+    <select id="lists" resultType="Map">
+        SELECT
+            row_number() over(order by id desc) as num
+	         , id
+             , title
+             , content
+             , system_registrar_id
+             , system_updater_id
+             , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
+             , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
+        FROM
+            create_board
+    </select>
+
+    <select id="listss" resultType="com.march.studyjsp.home.HomeDTO">
+        SELECT
+            row_number() over(order by id desc) as num
+	         , id
+             , title
+             , content
+             , system_registrar_id
+             , system_updater_id
+             , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
+             , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
+        FROM
+            create_board
+    </select>
+
+    <insert id="createBoard1" parameterType="com.march.studyjsp.home.HomeDTO">
+        INSERT
+        INTO create_board(title,
+                          content,
+                          system_registrar_id,
+                          system_updater_id)
+        VALUES ( #{title}
+               , #{content}
+               , #{systemRegistrarId}
+               , #{systemUpdaterId})
+    </insert>
+
+    <update id="updateBoard1" parameterType="com.march.studyjsp.home.HomeDTO">
+        UPDATE create_board
+        SET title               =#{title}
+          , system_registrar_id = #{systemRegistrarId}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteBoard1" parameterType="Long">
+        DELETE FROM create_board
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 복습2 -->
+    <select id="list2" resultType="com.march.studyjsp.home.HomeDTO">
+        SELECT
+            row_number() over(order by id desc) as num
+	         , id
+             , title
+             , content
+             , system_registrar_id
+             , system_updater_id
+             , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
+             , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
+        FROM
+            create_board
+    </select>
+
+    <insert id="insert2" parameterType="com.march.studyjsp.home.HomeDTO">
+        INSERT
+        INTO create_board(title,
+                          content,
+                          system_registrar_id,
+                          system_updater_id)
+        VALUES ( #{title}
+               , #{content}
+               , #{systemRegistrarId}
+               , #{systemUpdaterId})
+    </insert>
+
+    <update id="update2" parameterType="com.march.studyjsp.home.HomeDTO">
+        UPDATE create_board
+        SET title               =#{title}
+          , system_registrar_id = #{systemRegistrarId}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete2" parameterType="Long">
+        DELETE FROM create_board
+        WHERE id = #{id}
+    </delete>
+
 </mapper>

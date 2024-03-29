@@ -23,4 +23,24 @@ public interface HomeMapper {
     void updateBoard(HomeDTO homeDTO);
 
     void deleteBoard(Long id);
+
+//list 목록부터 delete API 만들기 복습
+    List<Map<String,Object>> lists();
+
+    List<HomeDTO> listss();
+
+    void createBoard1(HomeDTO homeDTO);
+
+    void updateBoard1(HomeDTO homeDTO);
+
+    void deleteBoard1(Long id);
+
+//list 목록부터 delete API 만들기 복습2
+    List<HomeDTO> list2();
+
+    void insert2(HomeDTO homeDTO);
+
+    void update2(HomeDTO homeDTO);
+
+    void delete2(Long id);
 }

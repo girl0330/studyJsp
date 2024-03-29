@@ -540,12 +540,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${list}" var="list">
+                            <c:forEach items="${list2}" var="list2">
                                 <tr>
-                                    <th scope="row">${list.num}</th>
-                                    <td>${list.title}</td>
-                                    <td>${list.systemRegistrarId}</td>
-                                    <td>${list.systemRegistrarDatetime}</td>
+                                    <th scope="row">${list2.num}</th>
+                                    <td>${list2.title}</td>
+                                    <td>${list2.systemRegistrarId}</td>
+                                    <td>${list2.systemRegistrarDatetime}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
