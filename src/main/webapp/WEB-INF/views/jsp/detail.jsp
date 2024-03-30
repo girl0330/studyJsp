@@ -1,13 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<script>
-
-    function goToDetail(id) {
-        const url ="/detail?id="
-        window.location.href = url+id;
-    }
-
-</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +8,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Tables / General - NiceAdmin Bootstrap Template</title>
+    <title>Forms / Layouts - NiceAdmin Bootstrap Template</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -371,17 +363,17 @@
         </li><!-- End Components Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="forms-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="forms-elements.html">
                         <i class="bi bi-circle"></i><span>Form Elements</span>
                     </a>
                 </li>
                 <li>
-                    <a href="forms-layouts.html">
+                    <a href="forms-layouts.html" class="active">
                         <i class="bi bi-circle"></i><span>Form Layouts</span>
                     </a>
                 </li>
@@ -399,12 +391,12 @@
         </li><!-- End Forms Nav -->
 
         <li class="nav-item">
-            <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="tables-general.html" class="active">
+                    <a href="tables-general.html">
                         <i class="bi bi-circle"></i><span>General Tables</span>
                     </a>
                 </li>
@@ -520,50 +512,45 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>General Tables</h1>
+        <h1>Form Layouts</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item">Tables</li>
-                <li class="breadcrumb-item active">General</li>
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item active">Layouts</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
-
     <section class="section">
         <div class="row">
-
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">list table</h5>
+                        <h5 class="card-title">Vertical Form</h5>
 
-                        <!-- Table with hoverable rows -->
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">제목</th>
-                                <th scope="col">등록자</th>
-                                <th scope="col">등록일자</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${list}" var="list2">
-                                <tr onclick="goToDetail(${list2.id});">
-                                    <th scope="row">${list2.num}</th>
-                                    <td>${list2.title}</td>
-                                    <td>${list2.systemRegistrarId}</td>
-                                    <td>${list2.systemRegistrarDatetime}</td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                        </table>
-                        <!-- End Table with hoverable rows -->
+                        <!-- Vertical Form -->
+                        <form class="row g-3" action="/update" method="POST">
+                            <input type="hidden" id="id" name="id" value="${detail.id}">
+                            <div class="col-12">
+                                <label for="title" class="form-label">제목</label>
+                                <input type="text" class="form-control" id="title" name="title" value="${detail.title}">
+                            </div>
+                            <div class="col-12">
+                                <label for="content" class="form-label">내용</label>
+                                <input type="text" class="form-control" id="content" name="content" value="${detail.content}">
+                            </div>
+                            <div class="col-12">
+                                <label for="systemRegistrarId" class="form-label">작성자</label>
+                                <input type="text" class="form-control" id="systemRegistrarId" name="systemRegistrarId" value="${detail.systemRegistrarId}">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </form><!-- Vertical Form -->
 
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
