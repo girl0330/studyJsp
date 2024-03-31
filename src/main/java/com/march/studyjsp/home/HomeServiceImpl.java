@@ -36,6 +36,7 @@ public class HomeServiceImpl implements HomeService {
     //삭제
     @Override
     public void deleteBoard(Long id) {
+        System.out.println("삭제 impl"+id);
         homeMapper.deleteBoard(id);
     }
 

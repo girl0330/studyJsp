@@ -3,7 +3,7 @@
 <script>
 
     function goToDetail(id) {
-        const url ="/detail?id="
+        const url ="/boardDetail?id="
         window.location.href = url+id;
     }
 
@@ -549,7 +549,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${list}" var="list2">
+                            <c:forEach items="${boardList}" var="list2">
                                 <tr onclick="goToDetail(${list2.id});">
                                     <th scope="row">${list2.num}</th>
                                     <td>${list2.title}</td>

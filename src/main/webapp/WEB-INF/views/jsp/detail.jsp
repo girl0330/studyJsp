@@ -1,5 +1,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script>
+    // document.getElementById("deleteButton").addEventListener("click", function() {
+    //     alert("아이템이 삭제되었습니다.");
+    // });
+
+    function listDelete(id) {
+        alert("삭제됨   "+id);
+        const url ="/boardDelete?id="+id;
+        window.location.href = url;
+    }
+    /*
+    function goToDetail(id) {
+    const url ="/detail?id="
+    window.location.href = url+id;
+    }
+    */
+</script>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -529,7 +547,7 @@
                         <h5 class="card-title">Vertical Form</h5>
 
                         <!-- Vertical Form -->
-                        <form class="row g-3" action="/update" method="POST">
+                        <form class="row g-3" action="/boardupdate" method="POST">
                             <input type="hidden" id="id" name="id" value="${detail.id}">
                             <div class="col-12">
                                 <label for="title" class="form-label">제목</label>
@@ -544,8 +562,8 @@
                                 <input type="text" class="form-control" id="systemRegistrarId" name="systemRegistrarId" value="${detail.systemRegistrarId}">
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                                <button type="reset" class="btn btn-secondary">Reset</button>
+                                <button type="submit" class="btn btn-primary">작성</button>
+                                <button type="button" onclick="listDelete(${detail.id});" class="btn btn-secondary">삭제</button>
                             </div>
                         </form><!-- Vertical Form -->
 

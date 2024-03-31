@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.march.studyjsp.board.BoardMapper">
+
+<!--글 작성-->
+    <insert id="boardInsert" parameterType="com.march.studyjsp.board.BoardDTO">
+        INSERT
+        INTO create_board (title,
+                           content,
+                           system_registrar_id,
+                           system_updater_id)
+        VALUES (#{title},
+                #{content},
+                #{systemRegistrarId},
+                #{systemUpdaterId})
+    </insert>
+
+<!--글 목록-->
+    <select id="boardList" resultType="com.march.studyjsp.board.BoardDTO">
+        SELECT
+            row_number() over(order by id desc) as num
+	         , id
+             , title
+             , content
+             , system_registrar_id
+             , system_updater_id
+             , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
+             , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
+        FROM
+            create_board
+    </select>
+
+<!--상세페이지-->
+    <select id="boardDetail" resultType="com.march.studyjsp.board.BoardDTO" parameterType="Long">
+        SELECT
+            row_number() over(order by id desc) as num
+	         , id
+             , title
+             , content
+             , system_registrar_id
+             , system_updater_id
+             , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
+             , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
+        FROM
+            create_board
+        WHERE
+            id = #{id}
+    </select>
+
+<!--업데이트-->
+    <update id="boardUpdate" parameterType="com.march.studyjsp.board.BoardDTO">
+        UPDATE create_board
+        SET title               = #{title}
+          , system_registrar_id = #{systemRegistrarId}
+        WHERE id = #{id}
+    </update>
+
+<!--삭제-->
+    <delete id="boardDelete" parameterType="Long">
+        DELETE FROM create_board
+        WHERE id=#{id}
+    </delete>
+</mapper>

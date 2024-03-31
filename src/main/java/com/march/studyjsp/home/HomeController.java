@@ -21,16 +21,16 @@ public class HomeController {
         return "jsp/index";
     }
 
-    @GetMapping("/{param}")
-    public String testview(@PathVariable String param, Model model) {
-        System.out.println("param:::    "+param);
-        if("list".equals(param)) {
-            System.out.println("LIST인가요??");
-            List<HomeDTO> list = homeService.homeList();
-            model.addAttribute("list",list);
-        }
-        return "jsp/"+param;
-    }
+//    @GetMapping("/{param}")
+//    public String testview(@PathVariable String param, Model model) {
+//        System.out.println("param:::    "+param);
+//        if("list".equals(param)) {
+//            System.out.println("LIST인가요??");
+//            List<HomeDTO> list = homeService.homeList();
+//            model.addAttribute("list",list);
+//        }
+//        return "jsp/"+param;
+//    }
 
     //수정
     @PostMapping("/update")
@@ -68,11 +68,11 @@ public class HomeController {
     }
 
     //삭제
-    @DeleteMapping("/delete/{id}")
-    public String deleteBoard(@PathVariable Long id) {
-        System.out.println("==================== "+id);
+    @GetMapping("/delete")
+    public String deleteBoard(@RequestParam("id") Long id) {
+        System.out.println("삭제Controller:::   "+id);
         homeService.deleteBoard(id);
-        return "jsp/test";
+        return "redirect:/list";
     }
 
 

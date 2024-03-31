@@ -1,4 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script>
+
+    function goToBoardWrite(id) {
+        window.location.href = "/boardinsert";
+    }
+
+</script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -513,7 +520,7 @@
         <h1>Dashboard</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a onclick="goToBoardWrite()" href="boardWrite.jsp">글쓰기</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </nav>
