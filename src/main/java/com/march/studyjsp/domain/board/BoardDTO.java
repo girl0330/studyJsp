@@ -1,9 +1,9 @@
-package com.march.studyjsp.home;
+package com.march.studyjsp.domain.board;
 
 import lombok.Data;
 
 @Data
-public class HomeDTO {
+public class BoardDTO {
 
     private Long num;
     private Long id;
@@ -15,4 +15,3 @@ public class HomeDTO {
     private String systemUpdateDatetime;
 
 }
-

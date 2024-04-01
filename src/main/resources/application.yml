@@ -1,8 +1,8 @@
 spring:
   # Mysql
   datasource:
-    driver-class-name:
-    url: jdbc:mysql://localhost:3306/jspStudy
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://localhost:3306/jspStudy
     username: root
     password: root
 

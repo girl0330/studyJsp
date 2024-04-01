@@ -1,4 +1,4 @@
-package com.march.studyjsp.board;
+package com.march.studyjsp.domain.board;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,12 +10,6 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService{
     private final BoardMapper boardMapper;
 
-    //작성
-//    @Override
-//    public BoardDTO boardInsert(BoardDTO boardDTO) {
-//        boardMapper.boardInsert(boardDTO);
-//        return boardDTO;
-//    }
 
     @Override
     public void boardInsert(BoardDTO boardDTO) {

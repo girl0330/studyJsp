@@ -45,8 +45,8 @@ dependencies {
     implementation 'javax.servlet:jstl'
     implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
 
-    //log4jdbc
-    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    //log4j설정
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 }
 
 tasks.named('test') {

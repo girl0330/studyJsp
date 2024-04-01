@@ -1,14 +1,12 @@
-package com.march.studyjsp.board;
-
-import org.apache.ibatis.annotations.Mapper;
+package com.march.studyjsp.domain.board;
 
 import java.util.List;
 
-@Mapper
-public interface BoardMapper {
+public interface BoardService {
 
     //작성
     void boardInsert(BoardDTO boardDTO);
+
 
     //글목록
     List<BoardDTO> boardList();
@@ -19,5 +17,6 @@ public interface BoardMapper {
     //수정
     void boardUpdate(BoardDTO boardDTO);
 
+    //삭제
     void boardDelete(Long id);
 }

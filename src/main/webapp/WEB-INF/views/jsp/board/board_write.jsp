@@ -1,24 +1,85 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <script>
-    // document.getElementById("deleteButton").addEventListener("click", function() {
-    //     alert("아이템이 삭제되었습니다.");
-    // });
 
-    function listDelete(id) {
-        alert("삭제됨   "+id);
-        const url ="/boardDelete?id="+id;
-        window.location.href = url;
+    let write = {
+
+        //초기화 or 최초실행
+        init : function(){
+            if(!this.emptyChkFn()){
+                return;
+            }
+
+            this.formSubmit();
+        },
+
+        emptyChkFn   : function() {
+            let valid = true;
+            const form = document.getElementById("insertForm");
+            const inputs = form.querySelectorAll("input[type='text']");
+
+
+            for (const input of inputs) {
+                const removeBlankData = input.value.replace(/\s*/, ""); //(Regex.blank),"")
+
+                if (removeBlankData === "") {
+                    let text = input.dataset.name;
+                    alert(text + "은/는 필수 입력 값입니다.");
+                    input.focus();
+                    valid = false;
+                    break;
+                }
+            }
+            return valid;
+        },
+        formSubmit   : function() {
+            const form = document.getElementById('insertForm');
+            const formData = new FormData(form);
+
+            // FormData 객체 확인
+            for (const pair of formData.entries()) {
+                console.log(pair[0] + ', ' + pair[1]);
+            }
+
+            // AJAX 요청 생성
+            const xhr = new XMLHttpRequest();
+            const url = "/board/boardInsert"; // 컨트롤러 URL을 여기에 입력하세요
+
+            xhr.open("POST", url, true);
+
+            // 요청 완료 시 처리할 콜백 함수
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // 요청이 성공했을 때의 처리
+                    console.log("전송 성공!");
+                    console.log(xhr.responseText); // 서버에서 온 응답 확인
+                    window.location.href = '/board/boardList';
+                } else {
+                    // 요청이 실패했을 때의 처리
+                    console.error("전송 실패");
+                }
+            };
+
+            // 요청 실패 시 처리할 콜백 함수
+            xhr.onerror = function () {
+                console.error("네트워크 오류");
+            };
+
+            // 폼 데이터 전송
+            xhr.send(formData);
+        }
     }
-    /*
-    function goToDetail(id) {
-    const url ="/detail?id="
-    window.location.href = url+id;
-    }
-    */
+
+
+    //DOM이 실행 후 안의 내용이 실행 됨
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById("button_insert").addEventListener("click" ,function(){
+            write.init();
+        });
+    });
+
 </script>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,24 +92,24 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../assets/img/favicon.png" rel="icon">
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 
     <!-- =======================================================
     * Template Name: NiceAdmin
@@ -66,7 +127,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
-            <img src="assets/img/logo.png" alt="">
+            <img src="../assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">NiceAdmin</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -181,7 +242,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                            <img src="../assets/img/messages-1.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Maria Hudson</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -195,7 +256,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                            <img src="../assets/img/messages-2.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>Anna Nelson</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -209,7 +270,7 @@
 
                     <li class="message-item">
                         <a href="#">
-                            <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                            <img src="../assets/img/messages-3.jpg" alt="" class="rounded-circle">
                             <div>
                                 <h4>David Muldon</h4>
                                 <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -232,7 +293,7 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
                     <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
                 </a><!-- End Profile Iamge Icon -->
 
@@ -547,23 +608,22 @@
                         <h5 class="card-title">Vertical Form</h5>
 
                         <!-- Vertical Form -->
-                        <form class="row g-3" action="/boardupdate" method="POST">
-                            <input type="hidden" id="id" name="id" value="${detail.id}">
+                        <form class="row g-3" id="insertForm" name="insertForm">
                             <div class="col-12">
                                 <label for="title" class="form-label">제목</label>
-                                <input type="text" class="form-control" id="title" name="title" value="${detail.title}">
+                                <input type="text" class="form-control" id="title" name="title" data-name="제목">
                             </div>
                             <div class="col-12">
                                 <label for="content" class="form-label">내용</label>
-                                <input type="text" class="form-control" id="content" name="content" value="${detail.content}">
+                                <input type="text" class="form-control" id="content" name="content" data-name="내용">
                             </div>
                             <div class="col-12">
                                 <label for="systemRegistrarId" class="form-label">작성자</label>
-                                <input type="text" class="form-control" id="systemRegistrarId" name="systemRegistrarId" value="${detail.systemRegistrarId}">
+                                <input type="text" class="form-control" id="systemRegistrarId" name="systemRegistrarId" data-name="작성자">
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary">작성</button>
-                                <button type="button" onclick="listDelete(${detail.id});" class="btn btn-secondary">삭제</button>
+                                <button type="button" class="btn btn-primary" id="button_insert" name="button_insert">등록</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
                             </div>
                         </form><!-- Vertical Form -->
 
@@ -592,17 +652,17 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
-<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/chart.js/chart.umd.js"></script>
-<script src="assets/vendor/echarts/echarts.min.js"></script>
-<script src="assets/vendor/quill/quill.min.js"></script>
-<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-<script src="assets/vendor/tinymce/tinymce.min.js"></script>
-<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/vendor/chart.js/chart.umd.js"></script>
+<script src="../assets/vendor/echarts/echarts.min.js"></script>
+<script src="../assets/vendor/quill/quill.min.js"></script>
+<script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="../assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="../assets/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
-<script src="assets/js/main.js"></script>
+<script src="../assets/js/main.js"></script>
 
 </body>
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.march.studyjsp.board.BoardMapper">
+<mapper namespace="com.march.studyjsp.domain.board.BoardMapper">
 
 <!--글 작성-->
-    <insert id="boardInsert" parameterType="com.march.studyjsp.board.BoardDTO">
+    <insert id="boardInsert" parameterType="com.march.studyjsp.domain.board.BoardDTO">
         INSERT
         INTO create_board (title,
                            content,
@@ -16,7 +16,7 @@
     </insert>
 
 <!--글 목록-->
-    <select id="boardList" resultType="com.march.studyjsp.board.BoardDTO">
+    <select id="boardList" resultType="com.march.studyjsp.domain.board.BoardDTO">
         SELECT
             row_number() over(order by id desc) as num
 	         , id
@@ -31,7 +31,7 @@
     </select>
 
 <!--상세페이지-->
-    <select id="boardDetail" resultType="com.march.studyjsp.board.BoardDTO" parameterType="Long">
+    <select id="boardDetail" resultType="com.march.studyjsp.domain.board.BoardDTO" parameterType="Long">
         SELECT
             row_number() over(order by id desc) as num
 	         , id
@@ -48,7 +48,7 @@
     </select>
 
 <!--업데이트-->
-    <update id="boardUpdate" parameterType="com.march.studyjsp.board.BoardDTO">
+    <update id="boardUpdate" parameterType="com.march.studyjsp.domain.board.BoardDTO">
         UPDATE create_board
         SET title               = #{title}
           , system_registrar_id = #{systemRegistrarId}
