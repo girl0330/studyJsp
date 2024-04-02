@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script>
-
+    // 글작성 실행
     let write = {
 
         //초기화 or 최초실행
@@ -11,18 +11,18 @@
                 return;
             }
 
+            //전송 실행
             this.formSubmit();
         },
 
+        //공백 검사 함수 정의
         emptyChkFn   : function() {
             let valid = true;
             const form = document.getElementById("insertForm");
             const inputs = form.querySelectorAll("input[type='text']");
 
-
             for (const input of inputs) {
                 const removeBlankData = input.value.replace(/\s*/, ""); //(Regex.blank),"")
-
                 if (removeBlankData === "") {
                     let text = input.dataset.name;
                     alert(text + "은/는 필수 입력 값입니다.");
@@ -33,6 +33,8 @@
             }
             return valid;
         },
+
+        //전송 함수 정의
         formSubmit   : function() {
             const form = document.getElementById('insertForm');
             const formData = new FormData(form);
@@ -46,11 +48,11 @@
             const xhr = new XMLHttpRequest();
             const url = "/board/boardInsert"; // 컨트롤러 URL을 여기에 입력하세요
 
-            xhr.open("POST", url, true);
+            xhr.open("POST", url, true); //요청을 초기화 한다
 
             // 요청 완료 시 처리할 콜백 함수
             xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 300) {
+                if (xhr.status >= 200 && xhr.status < 300) {//http응답 상태 코드
                     // 요청이 성공했을 때의 처리
                     console.log("전송 성공!");
                     console.log(xhr.responseText); // 서버에서 온 응답 확인
