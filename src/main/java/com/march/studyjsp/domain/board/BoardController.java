@@ -34,14 +34,14 @@ public class BoardController {
 
     //상세페이지
     @GetMapping("/boardDetail")
-    public String showBoardDetail(@RequestParam("id") Long id, Model model){
+    public String showBoardDetail(@RequestParam ("id") Long id, Model model){
         BoardDTO boardDetail = boardService.boardDetail(id);
         model.addAttribute("detail",boardDetail);
         return "jsp/board/board_detail";
     }
 
     //글 등록
-    @PostMapping("/boardInsert")
+    @PostMapping ("/boardInsert")
     public String boardInsert(BoardDTO boardDTO) {
         boardService.boardInsert(boardDTO);
         return "redirect:/board/boardList";
