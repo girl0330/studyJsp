@@ -5,4 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
     void saveUser(UserDTO userDTO);
+
+    UserDTO doLogin(UserDTO userDTO);
 }

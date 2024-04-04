@@ -31,7 +31,7 @@ dependencies {
     //mysql 설정
     //runtimeOnly 'com.mysql:mysql-connector-j'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'mysql:mysql-connector-java'
+    implementation 'mysql:mysql-connector-java:8.0.28'
 
     //lombok
     compileOnly 'org.projectlombok:lombok'
@@ -40,13 +40,16 @@ dependencies {
 
     //mybatis
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.2'
-    
+
     //JSP설정
     implementation 'javax.servlet:jstl'
     implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
 
     //log4j설정
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+
+    //BCrypt라이브러리
+    implementation 'org.springframework.security:spring-security-crypto:5.0.10.RELEASE'
 }
 
 tasks.named('test') {
