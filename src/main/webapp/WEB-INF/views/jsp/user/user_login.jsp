@@ -12,12 +12,11 @@
             }
             // register submit 실행
             this.formSubmit();
-
         },
 
         // 공백 검사 함수 정의
         emptyChkFn : function() {
-            alert("1")
+            alert("공백검사")
             let valid = true;
             const form = document.getElementById("loginForm");
             const inputs = form.querySelectorAll("input[type='text']");
@@ -25,7 +24,7 @@
                 const removeBlankData = input.value.replace(/\s*/,"");
                 if (removeBlankData === "") {
                     let text = input.dataset.name;
-                    alert(text + "text은/는 필수로 입력 값입니다.")
+                    alert(text + "은/는 필수로 입력 값입니다.")
                     input.focus();
                     valid = false;
                     break;
@@ -53,27 +52,34 @@
                 valid = false;
                 return valid;
             }
+            return valid;
         },
 
         //전송 함수 정의
         formSubmit : function() {
+            alert("전송함수")
             const form = document.getElementById("loginForm");
             const formData = new FormData(form);
 
             // AJAX 요청 생성
             const xhr = new XMLHttpRequest();
-            const url = "/board/registerInser";
+            const url = "/user/doLogin";
 
             xhr.open("POST", url, true);
 
             //요청 완료 시 처리할 롤백 함수
-            xml.onload = function () {
+            xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     console.log(xhr.responseText);//객체 xml로부터 응답받은 text를 console로 보여줌
-                    window.location.href = '/board/boardList'
+                    window.location.href = '/board/boardList';
                 } else {
-                    console.log("전송실패");
+                    console.error("전송실패");
                 }
+            };
+
+            // 요청 실패 시 처리할 콜백 함수
+            xhr.onerror = function () {
+                console.error("네트워크 오류");
             };
 
             //폼 데이터 전송
@@ -90,49 +96,6 @@
     });
 </script>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>Pages / Login - NiceAdmin Bootstrap Template</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link href="../assets/img/favicon.png" rel="icon">
-    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="../assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="../assets/css/style.css" rel="stylesheet">
-
-    <!-- =======================================================
-    * Template Name: NiceAdmin
-    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    * Updated: Mar 17 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
-</head>
-
-<body>
-
-<main>
     <div class="container">
 
         <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -161,7 +124,7 @@
                                     <div class="col-12">
                                         <label for="userId" class="form-label">id</label>
                                         <div class="input-group has-validation">
-<%--                                            <span class="input-group-text" id="inputGroupPrepend">@</span>--%>
+                                            <%--                                            <span class="input-group-text" id="inputGroupPrepend">@</span>--%>
                                             <input type="text" name="userId" class="form-control" id="userId" required>
                                             <div class="invalid-feedback">Please enter your username.</div>
                                         </div>
@@ -205,23 +168,3 @@
         </section>
 
     </div>
-</main><!-- End #main -->
-
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-<!-- Vendor JS Files -->
-<script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/vendor/chart.js/chart.umd.js"></script>
-<script src="../assets/vendor/echarts/echarts.min.js"></script>
-<script src="../assets/vendor/quill/quill.min.js"></script>
-<script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
-<script src="../assets/vendor/tinymce/tinymce.min.js"></script>
-<script src="../assets/vendor/php-email-form/validate.js"></script>
-
-<!-- Template Main JS File -->
-<script src="../assets/js/main.js"></script>
-
-</body>
-
-</html>

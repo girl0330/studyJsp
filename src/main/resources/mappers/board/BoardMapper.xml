@@ -5,7 +5,7 @@
 <!--글 작성-->
     <insert id="boardInsert" parameterType="com.march.studyjsp.domain.board.BoardDTO">
         INSERT
-        INTO create_board (title,
+        INTO board_info (title,
                            content,
                            system_registrar_id,
                            system_updater_id)
@@ -27,7 +27,7 @@
              , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
              , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
         FROM
-            create_board
+            board_info
     </select>
 
 <!--상세페이지-->
@@ -42,14 +42,14 @@
              , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
              , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
         FROM
-            create_board
+            board_info
         WHERE
             id = #{id}
     </select>
 
 <!--업데이트-->
     <update id="boardUpdate" parameterType="com.march.studyjsp.domain.board.BoardDTO">
-        UPDATE create_board
+        UPDATE board_info
         SET title               = #{title}
           , system_registrar_id = #{systemRegistrarId}
         WHERE id = #{id}
@@ -57,7 +57,7 @@
 
 <!--삭제-->
     <delete id="boardDelete" parameterType="Long">
-        DELETE FROM create_board
+        DELETE FROM board_info
         WHERE id=#{id}
     </delete>
 </mapper>

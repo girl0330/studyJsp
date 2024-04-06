@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+		"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+		"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- User Layout -->
+	<definition name="studyUserLayout" template="/WEB-INF/layouts/studyUserLayout.jsp">
+		<put-attribute name="meta" value="/WEB-INF/layouts/common/user/meta.jsp" />
+		<put-attribute name="title" value="jspStudy" />
+		<put-attribute name="styles" value="/WEB-INF/layouts/common/user/styles.jsp" />
+		<put-attribute name="script" value="/WEB-INF/layouts/common/user/script.jsp" />
+		<put-attribute name="header" value="/WEB-INF/layouts/common/user/header.jsp" />
+		<put-attribute name="sidebar" value="/WEB-INF/layouts/common/user/sidebar.jsp" /> <!-- 왼쪽 Left 메뉴 -->
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/layouts/common/user/footer.jsp" />
+	</definition>
+
+	<!-- User Page -->
+	<definition name="jsp/*" extends="studyUserLayout">
+		<put-attribute name="content" value="/WEB-INF/views/jsp/{1}.jsp" />
+	</definition>
+
+	<definition name="jsp/*/*" extends="studyUserLayout">
+		<put-attribute name="content" value="/WEB-INF/views/jsp/{1}/{2}.jsp" />
+	</definition>
+
+
+
+</tiles-definitions>

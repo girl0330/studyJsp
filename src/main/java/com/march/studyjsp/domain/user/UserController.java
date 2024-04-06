@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
@@ -23,25 +26,27 @@ public class UserController {
     @PostMapping("/registerInsert")
     public String userInsert(UserDTO userDTO) {
         System.out.println("화면");
-        System.out.println("userDTO"+ userDTO);
         userService.saveUser(userDTO);
+        System.out.println("userDTO"+ userDTO);
         return "jsp/board/board_list";
     }
 
     //로그인 페이지 이동
     @GetMapping("/login")
     public String loginView () {
+        System.out.println("로그인 페이지");
         return "jsp/user/user_login";
     }
 
-    //로그인 실행
+    //로그인 요청
     @PostMapping("/doLogin")
-    public String userLogin(@RequestBody  UserDTO userDTO, Model model) {
+    public String userLogin(UserDTO userDTO, HttpSession session) {
         System.out.println("로그인 화면");
 
         UserDTO user = userService.doLogin(userDTO);
         System.out.println("user:::   "+user);
+
+        session.setAttribute("userInfo",user);
         return "jsp/main";
     }
-
 }

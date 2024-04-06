@@ -45,6 +45,11 @@ dependencies {
     implementation 'javax.servlet:jstl'
     implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
 
+    //Tiles설정
+    implementation 'org.apache.tiles:tiles-core:3.0.8' // 타일즈 의존성
+    implementation 'org.apache.tiles:tiles-jsp:3.0.8' // 타일즈 JSP 지원 의존성
+    implementation 'org.apache.tiles:tiles-servlet:3.0.8'
+
     //log4j설정
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 

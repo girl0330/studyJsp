@@ -29,6 +29,7 @@ public class BoardController {
     //글쓰기 페이지
     @GetMapping("/boardWrite")
     public String showBoardWrite(){
+        System.out.println("글쓰기 화면 실행");
         return "jsp/board/board_write";
     }
 
@@ -44,6 +45,8 @@ public class BoardController {
     @PostMapping ("/boardInsert")
     public String boardInsert(BoardDTO boardDTO) {
         boardService.boardInsert(boardDTO);
+        System.out.println("글쓰기 화면");
+        System.out.println("boardDTO"+ boardDTO);
         return "redirect:/board/boardList";
     }
 
