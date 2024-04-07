@@ -4,10 +4,7 @@ package com.march.studyjsp.domain.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +17,7 @@ public class BoardController {
     //글 목록
     @GetMapping("/boardList")
     public String boardList(Model model) {
+        System.out.println("글 목록");
         List<BoardDTO> boardList = boardService.boardList();
         System.out.println("boardList   "+boardList);
         model.addAttribute("boardList",boardList);
@@ -36,6 +34,7 @@ public class BoardController {
     //상세페이지
     @GetMapping("/boardDetail")
     public String showBoardDetail(@RequestParam ("id") Long id, Model model){
+        System.out.println("상세페이지");
         BoardDTO boardDetail = boardService.boardDetail(id);
         model.addAttribute("detail",boardDetail);
         return "jsp/board/board_detail";
@@ -44,6 +43,7 @@ public class BoardController {
     //글 등록
     @PostMapping ("/boardInsert")
     public String boardInsert(BoardDTO boardDTO) {
+        System.out.println("등록");
         boardService.boardInsert(boardDTO);
         System.out.println("글쓰기 화면");
         System.out.println("boardDTO"+ boardDTO);
@@ -51,16 +51,20 @@ public class BoardController {
     }
 
     //글 수정
-    @PostMapping("/boardupdate")
+    @PostMapping("/boardUpdate")
+    @ResponseBody
     public String boardUpdate(BoardDTO boardDTO) {
         boardService.boardUpdate(boardDTO);
-        return "redirect:/boardList";
+        System.out.println("수정 완료");
+        return "1234";
     }
 
     //글 삭제
     @GetMapping("/boardDelete")
     public String boardDelete(@RequestParam("id") Long id) {
+        System.out.println(id);
         boardService.boardDelete(id);
-        return "redirect:/boardList";
+        System.out.println("!!!!!!!!!!!!!!!!");
+        return "redirect:/board/boardList";
     }
 }

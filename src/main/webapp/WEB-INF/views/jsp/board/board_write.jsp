@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script>
+
     // 글작성 실행
     let write = {
 
@@ -41,7 +42,9 @@
 
             // FormData 객체 확인
             for (const pair of formData.entries()) {
-                console.log(pair[0] + ', ' + pair[1]);
+                alert(pair[0] + ', ' + pair[1])
+                // console.log("-------------------------------");
+                // console.log(pair[0] + ', ' + pair[1]);
             }
 
             // AJAX 요청 생성
@@ -72,7 +75,6 @@
             xhr.send(formData);
         }
     }
-
 
     //DOM이 실행 후 안의 내용이 실행 됨
     document.addEventListener('DOMContentLoaded', function() {

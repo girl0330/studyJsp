@@ -2,20 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.march.studyjsp.domain.user.UserMapper">
 
+    <select id="doLogin" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="com.march.studyjsp.domain.user.UserDTO">
+        SELECT * FROM member_info WHERE USER_ID = #{userId} AND USER_PW = #{password}
+    </select>
+
     <insert id="saveUser" parameterType="com.march.studyjsp.domain.user.UserDTO">
-        <!-- table name change !!!!!!!!!!!!!!!!!!-->
-        INSERT
-        INTO USER_INFO ( USER_NAME ,
-        user_email ,
-        USER_ID ,
-        USER_PW )
-        VALUES (#{userName},
-        #{userEmail},
-        #{userId},
-        #{userPw})
+        INSERT INTO member_info (
+            user_id,
+            password,
+            name,
+            nickname,
+            email,
+            phone_number,
+            mobile_number,
+            system_registrar_id,
+            system_updater_id
+        )
+        VALUES (
+                   #{userId},
+                   #{password},
+                   #{name},
+                   #{nickname},
+                   #{email},
+                   #{phoneNumber},
+                   #{mobileNumber},
+                   '표현경',
+                   '표현경'
+               )
     </insert>
 
-    <select id="doLogin" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="com.march.studyjsp.domain.user.UserDTO">
-        SELECT * FROM user_info WHERE USER_ID = #{userId} AND USER_PW = #{userPw}
+
+    <select id="checkUserId" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="int">
+        SELECT
+            count(*) AS countId
+        FROM
+            member_info
+        WHERE
+            USER_id = #{userId}
     </select>
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,13 +23,16 @@ public class UserController {
         return "jsp/user/user_register";
     }
 
-//회원가입 등록
+    //회원가입 등록
     @PostMapping("/registerInsert")
-    public String userInsert(UserDTO userDTO) {
+    @ResponseBody
+    public Map<String, String> userInsert(UserDTO userDTO) {
         System.out.println("화면");
-        userService.saveUser(userDTO);
-        System.out.println("userDTO"+ userDTO);
-        return "jsp/board/board_list";
+        Map<String, String> map = userService.saveUser(userDTO);
+
+        System.out.println("map::::   "+map);
+
+        return map;
     }
 
     //로그인 페이지 이동

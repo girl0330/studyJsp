@@ -17,7 +17,6 @@
 
         // 공백 검사 함수 정의
         emptyChkFn : function () {
-            alert("공백검사")
             let valid = true;
             const form = document.getElementById("insertForm"); // 해당 id가 포함된 요소를 form에 담는다.
             const inputs = form.querySelectorAll("input[type='text']"); //form에 type이 text인 요소들을 inputs에 담는다.
@@ -37,13 +36,12 @@
 
         // 체크 검사 함수 정의
         checkFn : function () {
-            alert("체크 검사")
             let valid = true;
             const form = document.getElementById("insertForm");
             const checkBox = form.querySelector("input[type='checkbox']");
             const isChecked = checkBox.checked;
             if (!isChecked) {
-                alert("체크해 주세요");
+                alert("동의여부는 필수 입력 값입니다.");
                 valid = false;
                 return valid;
             }
@@ -53,7 +51,6 @@
 
         // 전송 함수 정의
         formSubmit   : function() {
-            alert("전송함수")
             const form = document.getElementById('insertForm');
             const formData = new FormData(form);
 
@@ -63,38 +60,39 @@
             }
 
             // AJAX 요청 생성
-            const xhr = new XMLHttpRequest();
             const url = "/user/registerInsert"; // 컨트롤러 URL을 여기에 입력하세요
 
-            xhr.open("POST", url, true); //요청을 초기화 한다
-
-            // 요청 완료 시 처리할 콜백 함수
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 300) {//http응답 상태 코드
-                    // 요청이 성공했을 때의 처리
-                    console.log("전송 성공!");
-                    console.log(xhr.responseText); // 서버에서 온 응답 확인
-                    window.location.href = '/user/login';
-                } else {
-                    // 요청이 실패했을 때의 처리
-                    console.error("전송 실패");
+            //비동기통신 es6에 적용된 방식
+            fetch(url, {
+                method: 'POST',
+                body: formData //전송할 데이터
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
-            };
-
-            // 요청 실패 시 처리할 콜백 함수
-            xhr.onerror = function () {
-                console.error("네트워크 오류");
-            };
-
-            // 폼 데이터 전송
-            xhr.send(formData);
+                return response.json(); // JSON 형식의 응답 데이터를 파싱하여 반환하는 Promise를 반환
+            })
+            .then(data => {
+                // 데이터 처리
+                console.log('Data uploaded:', data);
+                if(data.code === 'error') {
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                    location.href='/user/login';
+                }
+            })
+            .catch(error => {
+                // 오류 처리
+                console.error('There was a problem with the fetch operation:', error);
+            });
         }
     }
 
     //DOM이 실행 후 실행 됨
     document.addEventListener('DOMContentLoaded', function (){
         document.getElementById("button_register").addEventListener("click",function () {
-            alert("?")
             register.init();
         });
     });
@@ -128,28 +126,23 @@
                                     <div class="col-12">
                                         <label for="userId" class="form-label">아이디</label>
                                         <input type="text" name="userId" class="form-control" id="userId" data-name="아이디" >
-                                        <div class="invalid-feedback">Please, enter your name!</div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="userEmail" class="form-label">이메일</label>
-                                        <input type="text" name="userEmail" class="form-control" id="userEmail" data-name="이메일">
-                                        <div class="invalid-feedback">Please enter a valid Email add  dress!</div>
+                                        <label for="email" class="form-label">이메일</label>
+                                        <input type="text" class="form-control" name="email" id="email" data-name="이메일">
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="userName" class="form-label">이름</label>
+                                        <label for="name" class="form-label">이름</label>
                                         <div class="input-group has-validation">
-                                            <%--                                            <span class="input-group-text" id="inputGroupPrepend">@</span>--%>
-                                            <input type="text" name="userName" class="form-control" id="userName" data-name="이름" >
-                                            <div class="invalid-feedback">Please choose a username.</div>
+                                            <input type="text" class="form-control" name="name" id="name" data-name="이름" >
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="userPw" class="form-label">비밀번호</label>
-                                        <input type="text" name="userPw" class="form-control" id="userPw" data-name="비밀번호">
-                                        <div class="invalid-feedback">Please enter your password!</div>
+                                        <label for="password" class="form-label">비밀번호</label>
+                                        <input type="text" class="form-control" name="password" id="password" data-name="비밀번호">
                                     </div>
 
                                     <div class="col-12">

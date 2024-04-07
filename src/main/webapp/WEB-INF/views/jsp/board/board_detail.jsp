@@ -14,7 +14,7 @@
             }
 
             //전송 실행
-            this.fomrSubmit();
+            this.formSubmit();
         },
 
         //고백 검사 함수 정의
@@ -43,55 +43,42 @@
 
             // FormData 객체 확인
             for (const pair of formData.entries()) {
-                console.log(pair[0] + ', ' + pair[1] +"??????");
+                console.log(pair[0] + ', ' + pair[1])
             }
 
-            const xhr = new XMLHttpRequest();
-            const url = "/board/boardupdate";
+            const url = "/board/boardUpdate";
 
-            xhr.open("POST", url, true); //요청을 초기화 한다
 
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 300) {//http응답 상태 코드
-                    // 요청이 성공했을 때의 처리
-                    console.log("전송 성공!");
-                    console.log(xhr.responseText); // 서버에서 온 응답 확인
-                    window.location.href = '/board/boardList';
-                } else {
-                    // 요청이 실패했을 때의 처리
-                    console.error("전송 실패");
-                }
-            }
-
-            // 요청 실패 시 처리할 콜백 함수
-            xhr.onerror = function () {
-                console.error("네트워크 오류");
-            };
-
-            // 폼 데이터 전송
-            xhr.send(formData);
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    console.log('Received data:', data);
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
         }
     }
 
 
     function listDelete(id) {
+        const url ="/boardDelete?id=";
 
+        window.location.href = url+id;
+    }
 
-        alert("삭제됨   "+id);
-        const url ="/boardDelete?id="+id;
-        window.location.href = url;
-    }
-    /*
-    function goToDetail(id) {
-    const url ="/detail?id="
-    window.location.href = url+id;
-    }
-    */
 
     //DOM 실행 후 안의 내용이 실행 됨
     document.addEventListener('DOMContentLoaded', function () {
         document.getElementById("button_update").addEventListener("click", function () {
-            alert("확인")
             update.init();
         });
     });
@@ -132,8 +119,9 @@
                                 <input type="text" class="form-control" id="systemRegistrarId" name="systemRegistrarId" value="${detail.systemRegistrarId}" data-name="작성자">
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary" id="button_update" name="button_update">작성</button>
+                                <button type="button" class="btn btn-primary" id="button_update" name="button_update">수정</button>
                                 <button type="button" onclick="listDelete(${detail.id});" class="btn btn-secondary">삭제</button>
+<%--                                <a th:href="@{/board/delete(id=${board.id})}">글 삭제</a>--%>
                             </div>
                         </form><!-- Vertical Form -->
 

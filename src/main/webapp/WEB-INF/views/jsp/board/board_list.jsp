@@ -3,6 +3,7 @@
 <script>
 
     function goToDetail(id) {
+        alert("상세보기" +id)
         const url ="/board/boardDetail?id="
         window.location.href = url+id;
     }

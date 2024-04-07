@@ -7,4 +7,6 @@ public interface UserMapper {
     void saveUser(UserDTO userDTO);
 
     UserDTO doLogin(UserDTO userDTO);
+
+    int checkUserId(UserDTO userDTO);
 }

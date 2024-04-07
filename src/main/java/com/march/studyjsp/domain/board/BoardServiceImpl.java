@@ -10,7 +10,7 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService{
     private final BoardMapper boardMapper;
 
-
+    //글 등록
     @Override
     public void boardInsert(BoardDTO boardDTO) {
         boardMapper.boardInsert(boardDTO);
@@ -37,6 +37,7 @@ public class BoardServiceImpl implements BoardService{
     //삭제
     @Override
     public void boardDelete(Long id) {
+        System.out.println("@@@@@@@@@@@@@@@");
         boardMapper.boardDelete(id);
     }
 }

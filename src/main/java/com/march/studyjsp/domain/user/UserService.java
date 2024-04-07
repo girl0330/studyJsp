@@ -1,7 +1,9 @@
 package com.march.studyjsp.domain.user;
 
+import java.util.Map;
+
 public interface UserService {
-    void saveUser(UserDTO userDTO);
+    Map<String, String> saveUser(UserDTO userDTO);
 
     UserDTO doLogin(UserDTO userDTO);
 }

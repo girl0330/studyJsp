@@ -7,7 +7,7 @@
 
         //최조실행 함수 정의
         init : function () {
-            if(!this.emptyChkFn() || !this.checkFn()) {
+            if(!this.emptyChkFn()) {
                 return;
             }
             // register submit 실행
@@ -16,7 +16,6 @@
 
         // 공백 검사 함수 정의
         emptyChkFn : function() {
-            alert("공백검사")
             let valid = true;
             const form = document.getElementById("loginForm");
             const inputs = form.querySelectorAll("input[type='text']");
@@ -35,7 +34,6 @@
 
         // 체크박스검사 함수
         checkFn : function () {
-            alert("2")
             let valid = true;
             const form = document.getElementById("loginForm");
             const input = form.querySelector("input[type='checkbox']");
@@ -57,7 +55,6 @@
 
         //전송 함수 정의
         formSubmit : function() {
-            alert("전송함수")
             const form = document.getElementById("loginForm");
             const formData = new FormData(form);
 
@@ -90,7 +87,6 @@
 
     document.addEventListener('DOMContentLoaded', function (){
         document.getElementById("button_login").addEventListener("click",function () {
-            alert("?")
             login.init();
         });
     });
