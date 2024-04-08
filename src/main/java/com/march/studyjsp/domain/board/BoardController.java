@@ -1,12 +1,15 @@
 package com.march.studyjsp.domain.board;
 
 
+import com.march.studyjsp.domain.user.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,12 +45,14 @@ public class BoardController {
 
     //글 등록
     @PostMapping ("/boardInsert")
-    public String boardInsert(BoardDTO boardDTO) {
+    @ResponseBody
+    public Map<String, Object> boardInsert(BoardDTO boardDTO, HttpSession session) {
+
         System.out.println("등록");
-        boardService.boardInsert(boardDTO);
+        Map<String, Object> map = boardService.boardInsert(boardDTO,session);
         System.out.println("글쓰기 화면");
-        System.out.println("boardDTO"+ boardDTO);
-        return "redirect:/board/boardList";
+        System.out.println("map"+ map);
+        return map;
     }
 
     //글 수정

@@ -32,55 +32,59 @@
             return valid;
         },
 
-        // 체크박스검사 함수
-        checkFn : function () {
-            let valid = true;
-            const form = document.getElementById("loginForm");
-            const input = form.querySelector("input[type='checkbox']");
-            // const isChecked = input.checked;
-            // if (!isChecked) {
-            //     alert("체크해 주세요");
-            //     valid = false;
-            //     return valid;
-            // }
-            let check = input.checked;
-            if (check === false) {
-                let text = input.dataset.name;
-                alert(text + "체크가 필요합니다.")
-                valid = false;
-                return valid;
-            }
-            return valid;
-        },
-
         //전송 함수 정의
         formSubmit : function() {
             const form = document.getElementById("loginForm");
             const formData = new FormData(form);
 
+            for (const pair of formData.entries()) {
+                console.log("formdata;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" + pair[0] + ', ' + pair[1]);
+            }
             // AJAX 요청 생성
-            const xhr = new XMLHttpRequest();
+            // const xhr = new XMLHttpRequest();
             const url = "/user/doLogin";
 
-            xhr.open("POST", url, true);
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data uploaded:', data);
+                    if(data.code === 'error') {
+                        alert(data.message);
+                    } else {
+                        alert(data.message);
+                        location.href='/';
+                    }
+                })
+                .catch(error => {
+                    // 오류 처리
+                    console.error('There was a problem with the fetch operation:', error);
+                });
 
-            //요청 완료 시 처리할 롤백 함수
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    console.log(xhr.responseText);//객체 xml로부터 응답받은 text를 console로 보여줌
-                    window.location.href = '/board/boardList';
-                } else {
-                    console.error("전송실패");
-                }
-            };
-
-            // 요청 실패 시 처리할 콜백 함수
-            xhr.onerror = function () {
-                console.error("네트워크 오류");
-            };
+            // //요청 완료 시 처리할 롤백 함수
+            // xhr.onload = function () {
+            //     if (xhr.status >= 200 && xhr.status < 300) {
+            //         console.log(xhr.responseText);//객체 xml로부터 응답받은 text를 console로 보여줌
+            //         window.location.href = '/board/boardList';
+            //     } else {
+            //         console.error("전송실패");
+            //     }
+            // };
+            //
+            // // 요청 실패 시 처리할 콜백 함수
+            // xhr.onerror = function () {
+            //     console.error("네트워크 오류");
+            // };
 
             //폼 데이터 전송
-            xhr.send(formData);
+            // xhr.send(formData);
         }
     }
 
@@ -120,15 +124,14 @@
                                     <div class="col-12">
                                         <label for="userId" class="form-label">id</label>
                                         <div class="input-group has-validation">
-                                            <%--                                            <span class="input-group-text" id="inputGroupPrepend">@</span>--%>
                                             <input type="text" name="userId" class="form-control" id="userId" required>
                                             <div class="invalid-feedback">Please enter your username.</div>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="userPw" class="form-label">Password</label>
-                                        <input type="text" name="userPw" class="form-control" Id="userPw" required>
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="text" name="password" class="form-control" Id="password" required>
                                         <div class="invalid-feedback">Please enter your password!</div>
                                     </div>
 

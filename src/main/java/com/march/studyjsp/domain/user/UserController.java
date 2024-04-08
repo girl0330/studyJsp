@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,11 +28,7 @@ public class UserController {
     @PostMapping("/registerInsert")
     @ResponseBody
     public Map<String, String> userInsert(UserDTO userDTO) {
-        System.out.println("화면");
         Map<String, String> map = userService.saveUser(userDTO);
-
-        System.out.println("map::::   "+map);
-
         return map;
     }
 
@@ -44,13 +41,21 @@ public class UserController {
 
     //로그인 요청
     @PostMapping("/doLogin")
-    public String userLogin(UserDTO userDTO, HttpSession session) {
+    @ResponseBody
+    public Map<String, Object> userLogin(UserDTO userDTO, HttpSession session,Model model) {
         System.out.println("로그인 화면");
 
-        UserDTO user = userService.doLogin(userDTO);
-        System.out.println("user:::   "+user);
+        Map<String, Object> map = userService.doLogin(userDTO);
 
-        session.setAttribute("userInfo",user);
-        return "jsp/main";
+        if("error".equals(map.get("code"))) {
+            return map;
+        }
+
+        UserDTO x = (UserDTO) map.get("loginInfo");
+        model.addAttribute("memberNo",x.getMemberNo());
+
+        //session
+        session.setAttribute("userInfo",map.get("loginInfo"));
+        return map;
     }
 }

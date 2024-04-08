@@ -59,7 +59,7 @@
                 console.log("삥뽕;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" + pair[0] + ', ' + pair[1]);
             }
 
-            // AJAX 요청 생성
+            // fetch 요청 생성
             const url = "/user/registerInsert"; // 컨트롤러 URL을 여기에 입력하세요
 
             //비동기통신 es6에 적용된 방식
@@ -144,6 +144,28 @@
                                         <label for="password" class="form-label">비밀번호</label>
                                         <input type="text" class="form-control" name="password" id="password" data-name="비밀번호">
                                     </div>
+
+                                    <div class="col-12">
+                                        <label for="nickname" class="form-label">닉네임</label>
+                                        <div class="input-group has-validation">
+                                            <input type="text" class="form-control" name="nickname" id="nickname" data-name="닉네임" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="phoneNumber" class="form-label">전화 번호</label>
+                                        <div class="input-group has-validation">
+                                            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" data-name="전화 번호" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="mobileNumber" class="form-label">핸드폰 번호</label>
+                                        <div class="input-group has-validation">
+                                            <input type="text" class="form-control" name="mobileNumber" id="mobileNumber" data-name="핸드폰 번호" >
+                                        </div>
+                                    </div>
+
 
                                     <div class="col-12">
                                         <div class="form-check">

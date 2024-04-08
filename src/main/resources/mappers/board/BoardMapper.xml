@@ -4,47 +4,54 @@
 
 <!--글 작성-->
     <insert id="boardInsert" parameterType="com.march.studyjsp.domain.board.BoardDTO">
-        INSERT
-        INTO board_info (title,
-                           content,
-                           system_registrar_id,
-                           system_updater_id)
-        VALUES (#{title},
+        INSERT INTO board_info (	member_no,
+                                    title,
+                                    content,
+                                    board_type_code,
+                                    system_registrar_id,
+                                    system_updater_id
+                                    )
+        VALUES (#{memberNo},
+                #{title},
                 #{content},
+                'free',
                 #{systemRegistrarId},
-                #{systemUpdaterId})
+                #{systemUpdaterId}
+                )
     </insert>
+
+<!--title 확인-->
+    <select id="titleCheck" parameterType="com.march.studyjsp.domain.board.BoardDTO" resultType="String">
+        select
+    </select>
 
 <!--글 목록-->
     <select id="boardList" resultType="com.march.studyjsp.domain.board.BoardDTO">
-        SELECT
-            row_number() over(order by id desc) as num
-	         , id
-             , title
-             , content
-             , system_registrar_id
-             , system_updater_id
-             , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
-             , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
-        FROM
-            board_info
+        SELECT board_no,
+               member_no,
+               title,
+               content,
+               view_count,
+               system_registrar_id,
+               DATE_FORMAT(system_register_datetime, '%Y-%m-%d') AS system_registrar_datetime,
+               system_updater_id,
+               DATE_FORMAT(system_update_datetime, '%Y-%m-%d')    AS system_update_datetime
+        FROM board_info
     </select>
 
 <!--상세페이지-->
     <select id="boardDetail" resultType="com.march.studyjsp.domain.board.BoardDTO" parameterType="Long">
-        SELECT
-            row_number() over(order by id desc) as num
-	         , id
-             , title
-             , content
-             , system_registrar_id
-             , system_updater_id
-             , DATE_FORMAT(system_registrar_datetime, '%Y-%m-%d') AS system_registrar_datetime
-             , DATE_FORMAT(system_update_datetime, '%Y-%m-%d') AS system_update_datetime
-        FROM
-            board_info
-        WHERE
-            id = #{id}
+        SELECT board_no,
+               member_no,
+               title,
+               content,
+               view_count,
+               system_registrar_id,
+               DATE_FORMAT(system_register_datetime, '%Y-%m-%d') AS system_registrar_datetime,
+               system_updater_id,
+               DATE_FORMAT(system_update_datetime, '%Y-%m-%d')    AS system_update_datetime
+        FROM board_info;
+        WHERE board_no = #{boardNo}
     </select>
 
 <!--업데이트-->
@@ -52,12 +59,12 @@
         UPDATE board_info
         SET title               = #{title}
           , system_registrar_id = #{systemRegistrarId}
-        WHERE id = #{id}
+        WHERE board_no = #{boardNo}
     </update>
 
 <!--삭제-->
     <delete id="boardDelete" parameterType="Long">
         DELETE FROM board_info
-        WHERE id=#{id}
+        WHERE board_no = #{boardNo}
     </delete>
 </mapper>

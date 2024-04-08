@@ -1,11 +1,13 @@
 package com.march.studyjsp.domain.board;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 public interface BoardService {
 
     //작성
-    void boardInsert(BoardDTO boardDTO);
+    Map<String, Object> boardInsert(BoardDTO boardDTO, HttpSession session);
 
 
     //글목록

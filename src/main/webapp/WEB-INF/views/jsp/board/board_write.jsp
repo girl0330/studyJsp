@@ -48,31 +48,31 @@
             }
 
             // AJAX 요청 생성
-            const xhr = new XMLHttpRequest();
             const url = "/board/boardInsert"; // 컨트롤러 URL을 여기에 입력하세요
 
-            xhr.open("POST", url, true); //요청을 초기화 한다
-
-            // 요청 완료 시 처리할 콜백 함수
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 300) {//http응답 상태 코드
-                    // 요청이 성공했을 때의 처리
-                    console.log("전송 성공!");
-                    console.log(xhr.responseText); // 서버에서 온 응답 확인
-                    window.location.href = '/board/boardList';
-                } else {
-                    // 요청이 실패했을 때의 처리
-                    console.error("전송 실패");
-                }
-            };
-
-            // 요청 실패 시 처리할 콜백 함수
-            xhr.onerror = function () {
-                console.error("네트워크 오류");
-            };
-
-            // 폼 데이터 전송
-            xhr.send(formData);
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data uploaded:', data);
+                    if(data.code === 'error') {
+                        alert(data.message);
+                    } else {
+                        alert(data.message);
+                        location.href='/board/boardList';
+                    }
+                })
+                .catch(error => {
+                    // 오류 처리
+                    console.error('There was a problem with the fetch operation:', error);
+                });
         }
     }
 

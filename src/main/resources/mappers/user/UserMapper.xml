@@ -3,7 +3,22 @@
 <mapper namespace="com.march.studyjsp.domain.user.UserMapper">
 
     <select id="doLogin" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="com.march.studyjsp.domain.user.UserDTO">
-        SELECT * FROM member_info WHERE USER_ID = #{userId} AND USER_PW = #{password}
+        SELECT
+              member_no
+            , user_id
+            , name
+            , nickname
+        FROM member_info
+        WHERE user_id = #{userId}
+          AND password = #{password}
+    </select>
+
+    <select id="checkLoginId" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="int">
+        SELECT count(*) FROM member_info WHERE user_id = #{userId}
+    </select>
+
+    <select id="checkLoginPw" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="int">
+        SELECT count(*) FROM member_info WHERE user_id = #{userId} AND password = #{password}
     </select>
 
     <insert id="saveUser" parameterType="com.march.studyjsp.domain.user.UserDTO">
@@ -32,6 +47,7 @@
     </insert>
 
 
+<!--아이디 검사-->
     <select id="checkUserId" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="int">
         SELECT
             count(*) AS countId
@@ -40,4 +56,15 @@
         WHERE
             USER_id = #{userId}
     </select>
+
+<!--이메일 검사-->
+    <select id="checkUserEmail" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="int">
+        SELECT
+            count(*) AS countEmail
+        FROM
+            member_info
+        WHERE
+            email = #{email}
+    </select>
+
 </mapper>

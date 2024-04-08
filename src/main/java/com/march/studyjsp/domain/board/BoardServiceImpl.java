@@ -1,9 +1,13 @@
 package com.march.studyjsp.domain.board;
 
+import com.march.studyjsp.domain.user.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -12,8 +16,29 @@ public class BoardServiceImpl implements BoardService{
 
     //글 등록
     @Override
-    public void boardInsert(BoardDTO boardDTO) {
+    public Map<String, Object> boardInsert(BoardDTO boardDTO, HttpSession session) {
+
+        Map<String, Object> map = new HashMap<>();
+
+        UserDTO userInfo = (UserDTO) session.getAttribute("userInfo");
+
+
+        System.out.println("memberNo:::   "+userInfo);
+
+        if(userInfo ==  null ){
+            map.put("code","error");
+            map.put("message","로그인이 필요합니다.");
+            return map;
+        }
+
+        boardDTO.setMemberNo(userInfo.getMemberNo());
+        boardDTO.setSystemRegistrarId(String.valueOf(userInfo.getMemberNo()));
+        boardDTO.setSystemUpdaterId(String.valueOf(userInfo.getMemberNo()));
+        System.out.println("boardDTO:::   "+boardDTO);
         boardMapper.boardInsert(boardDTO);
+        map.put("code","success");
+        map.put("message","글쓰기가 완료되었습니다.");
+        return map;
     }
 
     //글목록
