@@ -46,12 +46,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${boardList}" var="list2">
-                                <tr onclick="goToDetail(${list2.id});">
-                                    <th scope="row">${list2.num}</th>
-                                    <td>${list2.title}</td>
-                                    <td>${list2.systemRegistrarId}</td>
-                                    <td>${list2.systemRegistrarDatetime}</td>
+                            <c:forEach items="${boardList}" var="boardList">
+                                <tr onclick="goToDetail(${boardList.boardNo});">
+                                    <th scope="row">${boardList.boardNo}</th>
+                                    <td>${boardList.title}</td>
+                                    <td>${boardList.systemRegistrarId}</td>
+                                    <td>${boardList.systemRegisterDatetime}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>

@@ -1,10 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<script>
+    function go() {
+        window.location.href ="board/boardWrite"
+    }
+</script>
     <div class="pagetitle">
         <h1>Dashboard</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a onclick="goToBoardWrite()" href="boardWrite.jsp">글쓰기</a></li>
+                <li class="breadcrumb-item"><a onclick="go()" href="board/boardWrite">글쓰기</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </nav>

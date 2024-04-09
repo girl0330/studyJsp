@@ -17,9 +17,16 @@
         SELECT count(*) FROM member_info WHERE user_id = #{userId}
     </select>
 
+    <select id="checkUserIdString" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="java.lang.String">
+        SELECT count(*)
+        FROM member_info
+        WHERE user_id = #{userId}
+    </select>
     <select id="checkLoginPw" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="int">
         SELECT count(*) FROM member_info WHERE user_id = #{userId} AND password = #{password}
     </select>
+
+
 
     <insert id="saveUser" parameterType="com.march.studyjsp.domain.user.UserDTO">
         INSERT INTO member_info (

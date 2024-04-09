@@ -26,7 +26,7 @@ public class UserController {
 
     //회원가입 등록
     @PostMapping("/registerInsert")
-    @ResponseBody
+    @ResponseBody //jsp한테 응답
     public Map<String, String> userInsert(UserDTO userDTO) {
         Map<String, String> map = userService.saveUser(userDTO);
         return map;
@@ -42,7 +42,7 @@ public class UserController {
     //로그인 요청
     @PostMapping("/doLogin")
     @ResponseBody
-    public Map<String, Object> userLogin(UserDTO userDTO, HttpSession session,Model model) {
+    public Map<String, Object> userLogin(UserDTO userDTO, HttpSession session) {
         System.out.println("로그인 화면");
 
         Map<String, Object> map = userService.doLogin(userDTO);
@@ -51,8 +51,8 @@ public class UserController {
             return map;
         }
 
-        UserDTO x = (UserDTO) map.get("loginInfo");
-        model.addAttribute("memberNo",x.getMemberNo());
+//        UserDTO loginUser = (UserDTO) map.get("loginInfo");
+//        model.addAttribute("memberNo",loginUser.getMemberNo());
 
         //session
         session.setAttribute("userInfo",map.get("loginInfo"));

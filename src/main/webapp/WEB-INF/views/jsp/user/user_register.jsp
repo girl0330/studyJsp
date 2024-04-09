@@ -76,7 +76,9 @@
             .then(data => {
                 // 데이터 처리
                 console.log('Data uploaded:', data);
-                if(data.code === 'error') {
+                if (data.code === 'test') {
+                  alert(data.message);
+                } else if(data.code === 'error') {
                     alert(data.message);
                 } else {
                     alert(data.message);

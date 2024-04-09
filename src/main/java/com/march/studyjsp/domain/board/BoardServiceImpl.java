@@ -34,7 +34,9 @@ public class BoardServiceImpl implements BoardService{
         boardDTO.setMemberNo(userInfo.getMemberNo());
         boardDTO.setSystemRegistrarId(String.valueOf(userInfo.getMemberNo()));
         boardDTO.setSystemUpdaterId(String.valueOf(userInfo.getMemberNo()));
+
         System.out.println("boardDTO:::   "+boardDTO);
+
         boardMapper.boardInsert(boardDTO);
         map.put("code","success");
         map.put("message","글쓰기가 완료되었습니다.");
@@ -55,8 +57,18 @@ public class BoardServiceImpl implements BoardService{
 
     //수정
     @Override
-    public void boardUpdate(BoardDTO boardDTO) {
+    public Map<String, Object> boardUpdate(BoardDTO boardDTO, HttpSession session) {
+
+        Map<String, Object> map = new HashMap<>();
+        UserDTO userInfo = (UserDTO) session.getAttribute("userInfo");
+
+        System.out.println("memberNo:::   "+userInfo);
+
         boardMapper.boardUpdate(boardDTO);
+
+        map.put("code","success");
+        map.put("message","글 수정이 완료되었습니다.");
+        return map;
     }
 
     //삭제

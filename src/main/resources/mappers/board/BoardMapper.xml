@@ -50,7 +50,7 @@
                DATE_FORMAT(system_register_datetime, '%Y-%m-%d') AS system_registrar_datetime,
                system_updater_id,
                DATE_FORMAT(system_update_datetime, '%Y-%m-%d')    AS system_update_datetime
-        FROM board_info;
+        FROM board_info
         WHERE board_no = #{boardNo}
     </select>
 
@@ -58,6 +58,7 @@
     <update id="boardUpdate" parameterType="com.march.studyjsp.domain.board.BoardDTO">
         UPDATE board_info
         SET title               = #{title}
+          , content = #{content}
           , system_registrar_id = #{systemRegistrarId}
         WHERE board_no = #{boardNo}
     </update>

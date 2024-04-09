@@ -13,6 +13,8 @@ public interface UserMapper {
     int checkUserId(UserDTO userDTO);
     int checkUserEmail(UserDTO userDTO);
 
+    String checkUserIdString(UserDTO userDTO);
+
     //로그인
     UserDTO doLogin(UserDTO userDTO);
 

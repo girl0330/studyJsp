@@ -17,7 +17,7 @@ public interface BoardService {
     BoardDTO boardDetail(Long id);
 
     //수정
-    void boardUpdate(BoardDTO boardDTO);
+    Map<String, Object> boardUpdate(BoardDTO boardDTO, HttpSession session);
 
     //삭제
     void boardDelete(Long id);

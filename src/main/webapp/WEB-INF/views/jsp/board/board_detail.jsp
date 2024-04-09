@@ -1,10 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
-    // document.getElementById("deleteButton").addEventListener("click", function() {
-    //     alert("아이템이 삭제되었습니다.");
-    // });
-
     //update 공백 검사 실행
     let update = {
         //최초실행
@@ -57,10 +53,14 @@
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
-                    return response.text();
+                    return response.json();
                 })
                 .then(data => {
                     console.log('Received data:', data);
+                    if(data.code === 'success') {
+                        alert(data.message);
+                        location.href='/board/boardList'
+                    }
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
@@ -70,8 +70,8 @@
 
 
     function listDelete(id) {
-        const url ="/boardDelete?id=";
-
+        alert(id+ "을/를 삭제합니다.")
+        const url ="/board/boardDelete?id=";
         window.location.href = url+id;
     }
 
@@ -105,7 +105,7 @@
                         <!-- Vertical Form -->
                         <%--                        <form class="row g-3" action="/boardupdate" method="POST">--%>
                         <form class="row g-3" id="updateForm" name="updateForm">
-                            <input type="hidden" id="id" name="id" value="${detail.id}">
+                            <input type="hidden" id="boardNo" name="boardNo" value="${detail.boardNo}">
                             <div class="col-12">
                                 <label for="title" class="form-label">제목</label>
                                 <input type="text" class="form-control" id="title" name="title" value="${detail.title}" data-name="제목">
@@ -120,7 +120,7 @@
                             </div>
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary" id="button_update" name="button_update">수정</button>
-                                <button type="button" onclick="listDelete(${detail.id});" class="btn btn-secondary">삭제</button>
+                                <button type="button" onclick="listDelete(${detail.boardNo})" class="btn btn-secondary">삭제</button>
 <%--                                <a th:href="@{/board/delete(id=${board.id})}">글 삭제</a>--%>
                             </div>
                         </form><!-- Vertical Form -->

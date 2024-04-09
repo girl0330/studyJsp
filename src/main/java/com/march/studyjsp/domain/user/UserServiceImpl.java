@@ -22,7 +22,21 @@ public class UserServiceImpl implements UserService{
 //        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 //        userDTO.setUserPw(passwordEncoder.encode(userDTO.getUserPw()));
 
+//        String string = new String();
+
+        String idCheckString = userMapper.checkUserIdString(userDTO);
+
+        if (idCheckString == "test") {
+            System.out.println("아이디가 중복입니다.");
+            Map<String, String> map = new HashMap<>();
+            map.put("cord","test");
+            map.put("message","스트링을 맵으로 형변환시킴");
+            return map;
+        }
+
         Map<String, String> map = new HashMap<>();
+
+
         //아이디 중복검사
         int idCheck = userMapper.checkUserId(userDTO);
 
@@ -31,6 +45,8 @@ public class UserServiceImpl implements UserService{
             map.put("message","아이디가 중복입니다.");
             return map;
         }
+
+
 
         //이메일 중복검사
         int emailCheck = userMapper.checkUserEmail(userDTO);
@@ -68,11 +84,13 @@ public class UserServiceImpl implements UserService{
             return map;
         }
 
-        UserDTO test = new UserDTO();
-        test = userMapper.doLogin(userDTO);
+//        UserDTO userInfo = new UserDTO();
+//        userInfo = userMapper.doLogin(userDTO);
+
+        UserDTO userInfo = userMapper.doLogin(userDTO);
 
         //로그인
-        map.put("loginInfo",test);
+        map.put("loginInfo",userInfo);
         map.put("code","success");
         map.put("message","로그인성공");
         return map;
