@@ -7,6 +7,7 @@
 
         //최조실행 함수 정의
         init : function () {
+            //emptyChkFn 실행
             if(!this.emptyChkFn()) {
                 return;
             }
@@ -37,6 +38,7 @@
             const form = document.getElementById("loginForm");
             const formData = new FormData(form);
 
+            //formData 객체 확인
             for (const pair of formData.entries()) {
                 console.log("formdata;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" + pair[0] + ', ' + pair[1]);
             }
@@ -124,20 +126,20 @@
                                     <div class="col-12">
                                         <label for="userId" class="form-label">id</label>
                                         <div class="input-group has-validation">
-                                            <input type="text" name="userId" class="form-control" id="userId" required>
+                                            <input type="text" class="form-control" name="userId" id="userId" required>
                                             <div class="invalid-feedback">Please enter your username.</div>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
                                         <label for="password" class="form-label">Password</label>
-                                        <input type="text" name="password" class="form-control" Id="password" required>
+                                        <input type="text" class="form-control" name="password" Id="password" required>
                                         <div class="invalid-feedback">Please enter your password!</div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember" value="true" id="checkbox" data-name="체크박스">
+                                            <input class="form-check-input" type="checkbox" value="true" name="remember" id="checkbox" data-name="체크박스">
                                             <label class="form-check-label" for="checkbox">Remember me</label>
                                         </div>
                                     </div>
@@ -145,7 +147,7 @@
                                         <button class="btn btn-primary w-100" type="button" name="button_login" id="button_login">Login</button>
                                     </div>
                                     <div class="col-12">
-                                        <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
+                                        <p class="small mb-0">Don't have account? <a href="user/user_register">Create an account</a></p>
                                     </div>
                                 </form>
 

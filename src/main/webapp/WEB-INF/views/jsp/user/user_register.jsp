@@ -76,9 +76,9 @@
             .then(data => {
                 // 데이터 처리
                 console.log('Data uploaded:', data);
-                if (data.code === 'test') {
-                  alert(data.message);
-                } else if(data.code === 'error') {
+                // if (data.code === 'test') {
+                //   alert(data.message);
+                if(data.code === 'error') {
                     alert(data.message);
                 } else {
                     alert(data.message);
@@ -127,7 +127,7 @@
                                 <form class="row g-3 needs-validation" id="insertForm" name="insertForm">
                                     <div class="col-12">
                                         <label for="userId" class="form-label">아이디</label>
-                                        <input type="text" name="userId" class="form-control" id="userId" data-name="아이디" >
+                                        <input type="text" class="form-control" name="userId" id="userId" data-name="아이디" >
                                     </div>
 
                                     <div class="col-12">
@@ -168,10 +168,9 @@
                                         </div>
                                     </div>
 
-
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" name="terms" type="checkbox" value="" id="terms" >
+                                            <input class="form-check-input" type="checkbox" value="" name="terms" id="terms" >
                                             <label class="form-check-label" for="terms">I agree and accept the <a href="#">terms and conditions</a></label>
                                             <div class="invalid-feedback">You must agree before submitting.</div>
                                         </div>
@@ -180,7 +179,7 @@
                                         <button type="button" class="btn btn-primary w-100" id="button_register" name="button_register">회원가입 하기</button>
                                     </div>
                                     <div class="col-12">
-                                        <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                                        <p class="small mb-0">Already have an account? <a href="user/user_login">Log in</a></p>
                                     </div>
                                 </form>
 

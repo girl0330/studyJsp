@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.march.studyjsp.domain.commend.CommentMapper">
+    <insert id="save" parameterType="com.march.studyjsp.domain.commend.CommentDTO">
+        INSERT INTO comment_info (
+                                comment_content,
+                                comment_writer,
+                                  board_no)
+        VALUES (
+                #{commentContent},
+                #{commentWriter},
+                #{boardNo})
+    </insert>
+
+    <select id="findAll" parameterType="Long" resultType="com.march.studyjsp.domain.commend.CommentDTO">
+        SELECT * FROM comment_info
+        WHERE board_no=#{boardNo} ORDER BY ID DESC
+    </select>
+</mapper>
