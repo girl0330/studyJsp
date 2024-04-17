@@ -1,12 +1,12 @@
 package com.march.studyjsp.domain.board;
 
 
-import com.march.studyjsp.domain.user.UserDTO;
+import com.march.studyjsp.domain.commend.CommentDTO;
+import com.march.studyjsp.domain.commend.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -17,34 +17,10 @@ import java.util.Map;
 @RequestMapping("/board")
 public class BoardController {
     private final BoardService boardService;
-
-    //글 목록
-
-    @GetMapping("/boardList")
-    public String boardList(HttpSession session,Model model) {
-        Object userInfo = session.getAttribute("userInfo");
-        if (userInfo != null) {
-            System.out.println("글 목록");
-            List<BoardDTO> boardList = boardService.boardList();
-            System.out.println("boardList   "+boardList);
-            model.addAttribute("boardList",boardList);
-            return "jsp/board/board_list";
-        } else {
-            return "redirect:/user/login";
-        }
-
-    }
-//    @GetMapping("/boardList")
-//    public String boardList(HttpSession session) {
-//        System.out.println("글 목록");
-//        List<BoardDTO> boardList = boardService.boardList();
-//        System.out.println("boardList   "+boardList);
-//        session.setAttribute("boardList",boardList);
-//        return "jsp/board/board_list";
-//    }
+    private final CommentService commentService;
 
     //글쓰기 페이지
-    @GetMapping("/boardWrite")
+    @GetMapping ("/boardWrite")
     public String showBoardWrite(HttpSession session) {
         System.out.println("글작성 페이지");
         // HttpSession에서 로그인 정보 확인
@@ -58,34 +34,42 @@ public class BoardController {
             // 또는 throw new UnauthorizedException(); // 예외를 던지는 등의 처리
         }
     }
-//    @GetMapping("/boardWrite")
-////    public ModelAndView loginCheck(@ModelAttribute UserDTO userDTO, HttpSession session) {
-////
-////    }
-//    public String showBoardWrite(){
-//        System.out.println("글쓰기 화면 실행");
-//        return "jsp/board/board_write";
-//    }
-
-    //상세페이지
-    @GetMapping("/boardDetail")
-    public String showBoardDetail(@RequestParam ("id") Long id, Model model){
-        System.out.println("상세페이지");
-        BoardDTO boardDetail = boardService.boardDetail(id);
-        model.addAttribute("detail",boardDetail);
-        return "jsp/board/board_detail";
-    }
 
     //글 등록
     @PostMapping ("/boardInsert")
     @ResponseBody
     public Map<String, Object> boardInsert(BoardDTO boardDTO, HttpSession session) {
-
         System.out.println("등록");
         Map<String, Object> map = boardService.boardInsert(boardDTO,session);
         System.out.println("글쓰기 화면");
         System.out.println("map"+ map);
         return map;
+    }
+
+    //글 목록
+    @GetMapping("/boardList")
+    public String boardList(HttpSession session, Model model) {
+        Object userInfo = session.getAttribute("userInfo");
+        if (userInfo != null) {
+            System.out.println("글 목록");
+            List<BoardDTO> boardList = boardService.boardList();
+            System.out.println("boardList   "+boardList);
+            model.addAttribute("boardList",boardList);
+            return "jsp/board/board_list";
+        } else {
+            return "redirect:/user/login";
+        }
+    }
+
+    //상세페이지
+    @GetMapping("/boardDetail")
+    public String showBoardDetail(@RequestParam("id") Long id, Model model){
+        System.out.println("상세페이지");
+        BoardDTO boardDetail = boardService.boardDetail(id);
+        model.addAttribute("detail",boardDetail);
+        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        model.addAttribute("commentList", commentDTOList);
+        return "jsp/board/board_detail";
     }
 
     //글 수정
@@ -106,4 +90,5 @@ public class BoardController {
         System.out.println("!!!!!!!!!!!!!!!!");
         return "redirect:/board/boardList";
     }
+
 }

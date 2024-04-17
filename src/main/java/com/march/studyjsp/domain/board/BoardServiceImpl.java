@@ -2,6 +2,7 @@ package com.march.studyjsp.domain.board;
 
 import com.march.studyjsp.domain.user.UserDTO;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -17,13 +18,10 @@ public class BoardServiceImpl implements BoardService{
     //글 등록
     @Override
     public Map<String, Object> boardInsert(BoardDTO boardDTO, HttpSession session) {
-
         Map<String, Object> map = new HashMap<>();
-
         UserDTO userInfo = (UserDTO) session.getAttribute("userInfo");
 
-
-        System.out.println("memberNo:::   "+userInfo);
+        System.out.println("userInfo:::   "+userInfo);
 
         if(userInfo ==  null ){
             map.put("code","error");
@@ -32,8 +30,8 @@ public class BoardServiceImpl implements BoardService{
         }
 
         boardDTO.setMemberNo(userInfo.getMemberNo());
-        boardDTO.setSystemRegistrarId(String.valueOf(userInfo.getMemberNo()));
-        boardDTO.setSystemUpdaterId(String.valueOf(userInfo.getMemberNo()));
+        boardDTO.setSystemRegistrarId(String.valueOf(userInfo.getUserId()));
+        boardDTO.setSystemUpdaterId(String.valueOf(userInfo.getUserId()));
 
         System.out.println("boardDTO:::   "+boardDTO);
 
@@ -77,4 +75,74 @@ public class BoardServiceImpl implements BoardService{
         System.out.println("@@@@@@@@@@@@@@@");
         boardMapper.boardDelete(id);
     }
+
+//    //글 등록
+//    @Override
+//    public Map<String, Object> pageInsert(BoardDTO boardDTO, HttpSession session) {
+//        Map<String, Object> map = new HashMap<>();
+//        UserDTO userLoginInfo = (UserDTO) session.getAttribute("userLoginInfo");
+//
+//        if (userLoginInfo == null) {
+//            map.put("code", "error");
+//            map.put("message", "로그인이 필요합니다.");
+//            return map;
+//        }
+//        boardDTO.setMemberNo(userLoginInfo.getMemberNo());
+//        boardDTO.setSystemRegistrarId(String.valueOf(userLoginInfo.getMemberNo()));
+//        boardDTO.setSystemUpdaterId(String.valueOf(userLoginInfo.getMemberNo()));
+//
+//        boardMapper.pageInsert(boardDTO);
+//        map.put("code","success");
+//        map.put("message","글쓰기가 완료되었습니다.");
+//        return map;
+//    }
+//
+//    //글 목록
+//    @Override
+//    public List<BoardDTO> pageList () {
+//        return boardMapper.pageList();
+//    }
+//
+//    //상세페이지
+//    @Override
+//    public BoardDTO pageDetail(Long id) {
+//        return boardMapper.pageDetail(id);
+//    }
+////    @Override
+////    public Map<String, Object> boardUpdate(BoardDTO boardDTO, HttpSession session) {
+////
+////        Map<String, Object> map = new HashMap<>();
+////        UserDTO userInfo = (UserDTO) session.getAttribute("userInfo");
+////
+////        System.out.println("memberNo:::   "+userInfo);
+////
+////        boardMapper.boardUpdate(boardDTO);
+////
+////        map.put("code","success");
+////        map.put("message","글 수정이 완료되었습니다.");
+////        return map;
+////    }
+//    //글 수정
+//    @Override
+//    public Map<String, Object> pageUpdate(BoardDTO boardDTO, HttpSession session) {
+//
+//        Map<String, Object> map = new HashMap<>();
+//        UserDTO userLoginInfo = (UserDTO) session.getAttribute("userLoginInfo");
+//
+//        boardDTO.setMemberNo(userLoginInfo.getMemberNo());
+//        boardDTO.setSystemRegistrarId(String.valueOf(userLoginInfo.getMemberNo()));
+//        boardDTO.setSystemUpdaterId(String.valueOf(userLoginInfo.getMemberNo()));
+//
+//        boardMapper.pageUpdate(boardDTO);
+//
+//        map.put("code","success");
+//        map.put("message", "글 수정이 완료되었습니다.");
+//        return map;
+//    }
+//
+//    //글 삭제
+//    @Override
+//    public void pageDelete(Long id) {
+//        boardMapper.pageDelete(id);
+//    }
 }

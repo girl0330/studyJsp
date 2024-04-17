@@ -20,4 +20,6 @@ public interface BoardMapper {
     void boardUpdate(BoardDTO boardDTO);
 
     void boardDelete(Long id);
+
 }
+

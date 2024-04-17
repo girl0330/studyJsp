@@ -75,6 +75,69 @@
         window.location.href = url+id;
     }
 
+    function go_boardList() {
+        const url ="/board/boardList";
+        window.location.href =url;
+    }
+
+    const button_comment = () => {
+        alert("클릭!")
+        const writer = document.getElementById("commentWriter").value;
+        const content = document.getElementById("commentContent").value;
+        const board = '${detail.boardNo}';
+
+        console.log("writer:", writer);
+        console.log("content:", content);
+        console.log("board:", board);
+
+
+        const data = {
+            commentWriter: writer,
+            commentContent: content,
+            boardNo: board
+        };
+
+        const url = "/comment/save";
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(commentList => {
+                console.log('작성성공');
+                console.log(commentList);
+                // 여기서 commentList를 사용할 수 있습니다.
+                let output = "<table>";
+                output += "<tr><th>댓글번호</th>";
+                output += "<th>내용</th>";
+                output += "<th>작성자</th>";
+                output += "<th>작성시간</th></tr>";
+                for(let i in commentList){
+                    output += "<tr>";
+                    output += "<td>"+commentList[i].id+"</td>";
+                    output += "<td>"+commentList[i].commentContent+"</td>";
+                    output += "<td>"+commentList[i].commentWriter+"</td>";
+                    output += "<td>"+commentList[i].commentCreatedDate+"</td>";
+                    output += "</tr>";
+                }
+                output += "</table>";
+                document.getElementById('comment_list').innerHTML = output;
+                document.getElementById('commentWriter').value='';
+                document.getElementById('commentContent').value='';
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
 
     //DOM 실행 후 안의 내용이 실행 됨
     document.addEventListener('DOMContentLoaded', function () {
@@ -89,7 +152,7 @@
         <h1>Form Layouts</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item">Forms</li>
                 <li class="breadcrumb-item active">Layouts</li>
             </ol>
@@ -121,10 +184,47 @@
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary" id="button_update" name="button_update">수정</button>
                                 <button type="button" onclick="listDelete(${detail.boardNo})" class="btn btn-secondary">삭제</button>
-<%--                                <a th:href="@{/board/delete(id=${board.id})}">글 삭제</a>--%>
+                                <button type="button" onclick="go_boardList()" href="board/boardList" class="btn btn-secondary">목록</button>
                             </div>
                         </form><!-- Vertical Form -->
 
+                        </div>
+
+                    <div>
+                        <div class="col-12">
+                            <label for="commentWriter" class="form-label">댓글 내용</label>
+                            <input type="text" class="form-control" id="commentWriter" data-name="댓글 내용">
+                        </div>
+                        <div class="col-12">
+                            <label for="commentContent" class="form-label">댓글 작성자</label>
+                            <input type="text" class="form-control" id="commentContent" data-name="댓글 작성자">
+                        </div>
+                        <div class="text-center">
+                            <button type="button" id="comment-write-btn" onclick="button_comment()" class="btn btn-secondary">댓글 등록</button>
+<%--                            <button id="comment-write-btn" onclick="commentWrite()">댓글작성</button>--%>
+                        </div>
+                    </div>
+
+                    <div class="col-12" id="comment_list">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">댓글번호</th>
+                                <th scope="col">댓글내용</th>
+                                <th scope="col">작성자</th>
+                                <th scope="col">등록일자</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${commentList}" var="comment">
+                                    <th scope="row">${comment.id}</th>
+                                    <td>${comment.commentContent}</td>
+                                    <td>${comment.commentWriter}</td>
+                                    <td>${comment.commentCreatedDate}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

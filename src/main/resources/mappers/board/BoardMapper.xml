@@ -20,10 +20,10 @@
                 )
     </insert>
 
-<!--title 확인-->
-    <select id="titleCheck" parameterType="com.march.studyjsp.domain.board.BoardDTO" resultType="String">
-        select
-    </select>
+<!--&lt;!&ndash;title 확인&ndash;&gt;-->
+<!--    <select id="titleCheck" parameterType="com.march.studyjsp.domain.board.BoardDTO" resultType="String">-->
+<!--        select-->
+<!--    </select>-->
 
 <!--글 목록-->
     <select id="boardList" resultType="com.march.studyjsp.domain.board.BoardDTO">
@@ -33,7 +33,7 @@
                content,
                view_count,
                system_registrar_id,
-               DATE_FORMAT(system_register_datetime, '%Y-%m-%d') AS system_registrar_datetime,
+               DATE_FORMAT(system_register_datetime, '%Y-%m-%d') AS system_register_datetime,
                system_updater_id,
                DATE_FORMAT(system_update_datetime, '%Y-%m-%d')    AS system_update_datetime
         FROM board_info
@@ -47,7 +47,7 @@
                content,
                view_count,
                system_registrar_id,
-               DATE_FORMAT(system_register_datetime, '%Y-%m-%d') AS system_registrar_datetime,
+               DATE_FORMAT(system_register_datetime, '%Y-%m-%d') AS system_register_datetime,
                system_updater_id,
                DATE_FORMAT(system_update_datetime, '%Y-%m-%d')    AS system_update_datetime
         FROM board_info
@@ -68,4 +68,12 @@
         DELETE FROM board_info
         WHERE board_no = #{boardNo}
     </delete>
+
+<!--//글쓰기 페이지-->
+    <!--//글 등록-->
+   <!-- //글 목록-->
+    <!--//상세페이지-->
+    <!--//글 수정-->
+   <!-- //글 삭제-->
+
 </mapper>

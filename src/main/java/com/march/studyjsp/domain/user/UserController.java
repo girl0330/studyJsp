@@ -41,7 +41,7 @@ public class UserController {
 
     //로그인 요청
     @PostMapping("/doLogin")
-    @ResponseBody
+    @ResponseBody //jsp한테 응답
     public Map<String, Object> userLogin(UserDTO userDTO, HttpSession session) {
         System.out.println("로그인 화면");
 
@@ -58,4 +58,32 @@ public class UserController {
         session.setAttribute("userInfo",map.get("loginInfo"));
         return map;
     }
+
+//    //회원가입
+//    @GetMapping("/registerHome")
+//    public String registerHome () {
+//        return "redirect:/registerView";
+//    }
+//
+//    @PostMapping("/registerView")
+//    @ResponseBody
+//    public  Map<String, Object> makeUser(UserDTO userDTO) {
+//        Map<String, Object> map = userService.makeUser(userDTO);
+//        return map;
+//    }
+//
+//    //로그인
+//    @GetMapping("/loginHome")
+//    public String loginHome() {
+//        return "redirect:/loginView";
+//    }
+//
+//    @PostMapping("/loginView")
+//    @ResponseBody
+//    public Map<String, Object> goLogin(UserDTO userDTO, HttpSession session) {
+//        Map<String, Object> map = userService.doLogin(userDTO);
+//        //session
+//        session.setAttribute("userLoginInfo",map.get("userLoginInfo"));
+//        return map;
+//    }
 }
