@@ -1,8 +1,7 @@
 package com.march.studyjsp.domain.board;
 
-import com.march.studyjsp.domain.user.UserDTO;
+import com.march.studyjsp.domain.member.MemberDTO;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -19,7 +18,7 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public Map<String, Object> boardInsert(BoardDTO boardDTO, HttpSession session) {
         Map<String, Object> map = new HashMap<>();
-        UserDTO userInfo = (UserDTO) session.getAttribute("userInfo");
+        MemberDTO userInfo = (MemberDTO) session.getAttribute("userInfo");
 
         System.out.println("userInfo:::   "+userInfo);
 
@@ -58,7 +57,8 @@ public class BoardServiceImpl implements BoardService{
     public Map<String, Object> boardUpdate(BoardDTO boardDTO, HttpSession session) {
 
         Map<String, Object> map = new HashMap<>();
-        UserDTO userInfo = (UserDTO) session.getAttribute("userInfo");
+        //info가 없을때
+        MemberDTO userInfo = (MemberDTO) session.getAttribute("userInfo");
 
         System.out.println("memberNo:::   "+userInfo);
 
@@ -80,7 +80,7 @@ public class BoardServiceImpl implements BoardService{
 //    @Override
 //    public Map<String, Object> pageInsert(BoardDTO boardDTO, HttpSession session) {
 //        Map<String, Object> map = new HashMap<>();
-//        UserDTO userLoginInfo = (UserDTO) session.getAttribute("userLoginInfo");
+//        MemberDTO userLoginInfo = (MemberDTO) session.getAttribute("userLoginInfo");
 //
 //        if (userLoginInfo == null) {
 //            map.put("code", "error");
@@ -112,7 +112,7 @@ public class BoardServiceImpl implements BoardService{
 ////    public Map<String, Object> boardUpdate(BoardDTO boardDTO, HttpSession session) {
 ////
 ////        Map<String, Object> map = new HashMap<>();
-////        UserDTO userInfo = (UserDTO) session.getAttribute("userInfo");
+////        MemberDTO userInfo = (MemberDTO) session.getAttribute("userInfo");
 ////
 ////        System.out.println("memberNo:::   "+userInfo);
 ////
@@ -127,7 +127,7 @@ public class BoardServiceImpl implements BoardService{
 //    public Map<String, Object> pageUpdate(BoardDTO boardDTO, HttpSession session) {
 //
 //        Map<String, Object> map = new HashMap<>();
-//        UserDTO userLoginInfo = (UserDTO) session.getAttribute("userLoginInfo");
+//        MemberDTO userLoginInfo = (MemberDTO) session.getAttribute("userLoginInfo");
 //
 //        boardDTO.setMemberNo(userLoginInfo.getMemberNo());
 //        boardDTO.setSystemRegistrarId(String.valueOf(userLoginInfo.getMemberNo()));

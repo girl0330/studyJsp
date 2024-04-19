@@ -44,7 +44,7 @@
             }
             // AJAX 요청 생성
             // const xhr = new XMLHttpRequest();
-            const url = "/user/doLogin";
+            const url = "/member/doLogin";
 
             fetch(url, {
                 method: 'POST',
@@ -146,8 +146,9 @@
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100" type="button" name="button_login" id="button_login">Login</button>
                                     </div>
+
                                     <div class="col-12">
-                                        <p class="small mb-0">Don't have account? <a href="user/user_register">Create an account</a></p>
+                                        <p class="small mb-0">Don't have account? <a href="member/member_register">Create an account</a></p>
                                     </div>
                                 </form>
 

@@ -60,7 +60,7 @@
             }
 
             // fetch 요청 생성
-            const url = "/user/registerInsert"; // 컨트롤러 URL을 여기에 입력하세요
+            const url = "/member/registerInsert"; // 컨트롤러 URL을 여기에 입력하세요
 
             //비동기통신 es6에 적용된 방식
             fetch(url, {
@@ -82,7 +82,7 @@
                     alert(data.message);
                 } else {
                     alert(data.message);
-                    location.href='/user/login';
+                    location.href='/member/login';
                 }
             })
             .catch(error => {
@@ -179,7 +179,7 @@
                                         <button type="button" class="btn btn-primary w-100" id="button_register" name="button_register">회원가입 하기</button>
                                     </div>
                                     <div class="col-12">
-                                        <p class="small mb-0">Already have an account? <a href="user/user_login">Log in</a></p>
+                                        <p class="small mb-0">Already have an account? <a href="member/member_login">Log in</a></p>
                                     </div>
                                 </form>
 

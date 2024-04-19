@@ -2,20 +2,48 @@
 
 <script>
     function go_boardWrite() {
-        window.location.href ="board/boardWrite"
+        window.location.href = "board/boardWrite"
     }
 
     function go_boardList() {
-        window.location.href ="board/boardList"
+        window.location.href = "board/boardList"
     }
+
+    function go_userMemberList() {
+        window.location.href = "member/memberList"
+    }
+
+
+
+
+    function logout() {
+        alert("로그아웃 버튼")
+        fetch('/user/doLogout', {
+            method: 'GET'
+        })
+            .then(response => {
+                if (response.ok) {
+                    // 로그아웃 성공 시 로그인 페이지로 리다이렉션합니다.
+                    window.location.href = 'member/login'; // 로그인 페이지 URL로 변경해주세요.
+                } else {
+                    // 로그아웃 실패 시 오류 메시지를 표시하거나 다른 작업을 수행할 수 있습니다.
+                    console.error('로그아웃 실패');
+                }
+            })
+            .catch(error => {
+                console.error('네트워크 오류:', error);
+            });
+    }
+
 </script>
-    <div class="pagetitle">
-        <h1>Dashboard</h1>
-        <nav>
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a onclick="go_boardWrite()" href="board/boardWrite">글쓰기</a></li>
                 <li class="breadcrumb-item"><a onclick="go_boardList()" href="board/boardList">글목록</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item active"><a onclick="go_userMemberList()" href="member/memberList">회워목록 조회</a></li>
+                <li class="breadcrumb-item"><a class="logout-link" onclick="logout()" id="logout_button" href="#">로그아웃</a></li>
             </ol>
         </nav>
     </div><!-- End Page Title -->

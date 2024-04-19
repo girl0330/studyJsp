@@ -1,9 +1,9 @@
-package com.march.studyjsp.domain.user;
+package com.march.studyjsp.domain.member;
 
 import lombok.Data;
 //user_info
 @Data
-public class UserDTO {
+public class MemberDTO {
 
         private int memberNo;
         private String userId;

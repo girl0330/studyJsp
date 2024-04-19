@@ -71,7 +71,7 @@
 
     function listDelete(id) {
         alert(id+ "을/를 삭제합니다.")
-        const url ="/board/boardDelete?id=";
+        const url ="/member/memberDelete?id=";
         window.location.href = url+id;
     }
 
@@ -168,23 +168,39 @@
                         <!-- Vertical Form -->
                         <%--                        <form class="row g-3" action="/boardupdate" method="POST">--%>
                         <form class="row g-3" id="updateForm" name="updateForm">
-                            <input type="hidden" id="boardNo" name="boardNo" value="${detail.boardNo}">
+                            <input type="hidden" id="boardNo" name="boardNo" value="${memberDetail.memberNo}">
                             <div class="col-12">
-                                <label for="title" class="form-label">제목</label>
-                                <input type="text" class="form-control" id="title" name="title" value="${detail.title}" data-name="제목">
+                                <label for="userId" class="form-label">아이디</label>
+                                <input type="text" class="form-control" id="userId" name="userId" value="${memberDetail.userId}" data-name="id">
                             </div>
                             <div class="col-12">
-                                <label for="content" class="form-label">내용</label>
-                                <input type="text" class="form-control" id="content" name="content" value="${detail.content}" data-name="내용">
+                                <label for="password" class="form-label">비밀번호</label>
+                                <input type="text" class="form-control" id="password" name="password" value="${memberDetail.password}" data-name="비밀번호">
                             </div>
                             <div class="col-12">
-                                <label for="systemRegistrarId" class="form-label">작성자</label>
-                                <input type="text" class="form-control" id="systemRegistrarId" name="systemRegistrarId" value="${detail.systemRegistrarId}" data-name="작성자">
+                                <label for="member_name" class="form-label">이름</label>
+                                <input type="text" class="form-control" id="member_name" name="member_name" value="${memberDetail.name}" data-name="이름">
+                            </div>
+                            <div class="col-12">
+                                <label for="nickname" class="form-label">닉네임</label>
+                                <input type="text" class="form-control" id="nickname" name="nickname" value="${memberDetail.nickname}" data-name="닉네임">
+                            </div>
+                            <div class="col-12">
+                                <label for="email" class="form-label">이메일</label>
+                                <input type="text" class="form-control" id="email" name="content" value="${memberDetail.email}" data-name="이메일">
+                            </div>
+                            <div class="col-12">
+                                <label for="phoneNumber" class="form-label">핸드폰 번호</label>
+                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="${memberDetail.phoneNumber}" data-name="핸드폰 번호">
+                            </div>
+                            <div class="col-12">
+                                <label for="mobileNumber" class="form-label">모바일 번호</label>
+                                <input type="text" class="form-control" id="mobileNumber" name="mobileNumber" value="${memberDetail.mobileNumber}" data-name="모바일 번호">
                             </div>
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary" id="button_update" name="button_update">수정</button>
-                                <button type="button" onclick="listDelete(${detail.boardNo})" class="btn btn-secondary">삭제</button>
-                                <button type="button" onclick="go_boardList()" href="board/boardList" class="btn btn-secondary">목록</button>
+                                <button type="button" onclick="listDelete(${memberDetail.memberNo})" class="btn btn-secondary">삭제</button>
+                                <button type="button" onclick="go_boardList()" href="member/memberList" class="btn btn-secondary">목록</button>
                             </div>
                         </form><!-- Vertical Form -->
 

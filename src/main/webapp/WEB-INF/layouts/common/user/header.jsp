@@ -219,6 +219,12 @@
                         <a class="dropdown-item d-flex align-items-center" href="#">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign Out</span>
+                            <span>
+                            <form action="/logout" method="post">
+                                <button type="submit"><span class="skip_info">로그아웃</span><i class="fas fa-sign-out-alt"></i></button>
+                            </form>
+                            </span>
+
                         </a>
                     </li>
 

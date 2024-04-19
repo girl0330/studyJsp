@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.march.studyjsp.domain.user.UserMapper">
+<mapper namespace="com.march.studyjsp.domain.member.MemberMapper">
 
 <!--회원가입-->
-    <insert id="saveUser" parameterType="com.march.studyjsp.domain.user.UserDTO">
+    <insert id="saveUser" parameterType="com.march.studyjsp.domain.member.MemberDTO">
         INSERT INTO member_info (
             user_id,
             password,
@@ -30,7 +30,7 @@
 
 
     <!--아이디 검사-->
-    <select id="checkUserId" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="int">
+    <select id="checkUserId" parameterType="com.march.studyjsp.domain.member.MemberDTO" resultType="int">
         SELECT
             count(*) AS countId
         FROM
@@ -40,7 +40,7 @@
     </select>
 
     <!--이메일 검사-->
-    <select id="checkUserEmail" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="int">
+    <select id="checkUserEmail" parameterType="com.march.studyjsp.domain.member.MemberDTO" resultType="int">
         SELECT
             count(*) AS countEmail
         FROM
@@ -50,7 +50,7 @@
     </select>
 
 <!-- 로그인 -->
-    <select id="doLogin" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="com.march.studyjsp.domain.user.UserDTO">
+    <select id="doLogin" parameterType="com.march.studyjsp.domain.member.MemberDTO" resultType="com.march.studyjsp.domain.member.MemberDTO">
         SELECT
               member_no
             , user_id
@@ -61,24 +61,40 @@
           AND password = #{password}
     </select>
 
-    <select id="checkLoginId" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="int">
+    <select id="checkLoginId" parameterType="com.march.studyjsp.domain.member.MemberDTO" resultType="int">
         SELECT count(*)
         FROM member_info
         WHERE user_id = #{userId}
     </select>
 
-    <select id="checkLoginPw" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="int">
+    <select id="checkLoginPw" parameterType="com.march.studyjsp.domain.member.MemberDTO" resultType="int">
         SELECT count(*)
         FROM member_info
         WHERE user_id = #{userId}
           AND password = #{password}
     </select>
 
-<!--    <select id="checkUserIdString" parameterType="com.march.studyjsp.domain.user.UserDTO" resultType="java.lang.String">-->
-<!--        SELECT count(*)-->
-<!--        FROM member_info-->
-<!--        WHERE user_id = #{userId}-->
-<!--    </select>-->
+<!--  회원목록  -->
+    <select id="findAll" resultType="com.march.studyjsp.domain.member.MemberDTO">
+        SELECT member_no,
+               user_id,
+               name,
+               nickname
+        FROM member_info
+    </select>
 
+    <!--회워 상세페이지-->
+    <select id="memberDetail" resultType="com.march.studyjsp.domain.member.MemberDTO" parameterType="Long">
+        SELECT member_no,
+               user_id,
+               password,
+               name,
+               nickname,
+               email,
+               phone_number,
+               mobile_number
+        FROM member_info
+        WHERE member_no = #{memberNo}
+    </select>
 
 </mapper>
