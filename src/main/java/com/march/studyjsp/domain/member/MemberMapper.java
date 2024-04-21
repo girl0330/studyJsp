@@ -14,7 +14,6 @@ public interface MemberMapper {
     int checkUserId(MemberDTO memberDTO);
     int checkUserEmail(MemberDTO memberDTO);
 
-//    String checkUserIdString(MemberDTO userDTO);
 
     //로그인
     MemberDTO doLogin(MemberDTO memberDTO);
@@ -29,24 +28,9 @@ public interface MemberMapper {
     //회원상세보기
     MemberDTO memberDetail(Long id);
 
-    //회원가입--------------------------------->
-    void makeUser(MemberDTO memberDTO);
+    //회워 프로필
+    MemberDTO findPro(int memberNo);
 
-    //회원가입시 아이디 중복겁사
-    int makeUserIdCheck(MemberDTO memberDTO);
-
-    //회원가입시 이메일 중복검사
-    int makeUserEmailCheck(MemberDTO memberDTO);
-
-    //로그인
-    MemberDTO goLogin(MemberDTO memberDTO);
-
-    //로그인시 아이디 일치검사
-    int loginIdCheck(MemberDTO memberDTO);
-
-    //로그인시 비밀번호 일치검사
-    int loginPassworkCheck(MemberDTO memberDTO);
-
-
-
+    //회원 프로필 수정
+    void memberUpdate(MemberDTO memberDTO);
 }

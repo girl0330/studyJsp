@@ -44,6 +44,7 @@
                 <li class="breadcrumb-item"><a onclick="go_boardList()" href="board/boardList">글목록</a></li>
                 <li class="breadcrumb-item active"><a onclick="go_userMemberList()" href="member/memberList">회워목록 조회</a></li>
                 <li class="breadcrumb-item"><a class="logout-link" onclick="logout()" id="logout_button" href="#">로그아웃</a></li>
+                <li class="breadcrumb-item"><a class="logout-link" onclick="" href="member/profile">프로필</a></li>
             </ol>
         </nav>
     </div><!-- End Page Title -->

@@ -4,7 +4,7 @@
 
     function goToDetail(id) {
         alert("상세보기" +id)
-        const url ="/user/memberDetail?id="
+        const url ="/member/memberDetail?id="
         window.location.href = url+id;
     }
 

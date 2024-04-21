@@ -57,7 +57,7 @@
 <!--업데이트-->
     <update id="boardUpdate" parameterType="com.march.studyjsp.domain.board.BoardDTO">
         UPDATE board_info
-        SET title               = #{title}
+        SET title = #{title}
           , content = #{content}
           , system_registrar_id = #{systemRegistrarId}
         WHERE board_no = #{boardNo}

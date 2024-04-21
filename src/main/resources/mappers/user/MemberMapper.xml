@@ -97,4 +97,27 @@
         WHERE member_no = #{memberNo}
     </select>
 
+<!-- 회원 프로필 -->
+    <select id="findPro" parameterType="int" resultType="com.march.studyjsp.domain.member.MemberDTO" >
+        SELECT member_no,
+               user_id,
+               password,
+               name,
+               nickname,
+               email,
+               phone_number,
+               mobile_number
+        FROM member_info
+        WHERE member_no = #{memberNo}
+    </select>
+
+<!--회원프로필 수정-->
+    <update id="memberUpdate" parameterType="com.march.studyjsp.domain.member.MemberDTO">
+        UPDATE member_info
+        SET nickname = #{nickname},
+            email = #{email},
+            phone_number = #{phoneNumber},
+            mobile_number = #{mobileNumber}
+        WHERE member_no = #{memberNo}
+    </update>
 </mapper>

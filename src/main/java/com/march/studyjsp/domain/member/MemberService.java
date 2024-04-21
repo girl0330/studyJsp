@@ -2,6 +2,7 @@ package com.march.studyjsp.domain.member;
 
 import com.march.studyjsp.domain.board.BoardDTO;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,12 @@ public interface MemberService {
 
     //회원 상세보기
     MemberDTO memberDetail(Long id);
+
+    //회원프로필
+    MemberDTO findPro(int memberNo);
+
+    //회원 프로필 수정
+    Map<String, Object> memberUpdate(MemberDTO memberDTO, HttpSession session);
 
 
     //회원가입

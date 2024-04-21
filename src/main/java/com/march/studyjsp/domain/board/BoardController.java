@@ -30,7 +30,7 @@ public class BoardController {
             return "jsp/board/board_write"; // 여기에 실제 게시글 작성 페이지 경로를 반환하십시오.
         } else {
             // 로그인한 사용자 정보가 없다면 로그인 페이지로 리다이렉트 또는 예외 처리
-            return "redirect:/user/login"; // 로그인 페이지로 리다이렉트하는 경우
+            return "redirect:/member/login"; // 로그인 페이지로 리다이렉트하는 경우
             // 또는 throw new UnauthorizedException(); // 예외를 던지는 등의 처리
         }
     }
@@ -50,7 +50,7 @@ public class BoardController {
     @GetMapping("/boardList")
     public String boardList(HttpSession session, Model model) {
         Object userInfo = session.getAttribute("userInfo");
-        if (userInfo != null) {
+        if (userInfo != null) { //
             System.out.println("글 목록");
             List<BoardDTO> boardList = boardService.boardList();
             System.out.println("boardList   "+boardList);

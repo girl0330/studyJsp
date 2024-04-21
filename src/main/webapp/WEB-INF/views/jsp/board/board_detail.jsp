@@ -16,7 +16,7 @@
         //고백 검사 함수 정의
         emptyChkFn : function () {
             let valid = true;
-            const form = document.getElementById("updateForm")
+            const form = document.getElementById("updateForm");
             const updates = form.querySelectorAll("input [type='text']");
 
             for(const update of updates) {
@@ -44,7 +44,6 @@
 
             const url = "/board/boardUpdate";
 
-
             fetch(url, {
                 method: 'POST',
                 body: formData
@@ -57,9 +56,9 @@
                 })
                 .then(data => {
                     console.log('Received data:', data);
-                    if(data.code === 'success') {
+                    if (data.code === 'success') {
                         alert(data.message);
-                        location.href='/board/boardList'
+                        location.href = '/board/boardList'
                     }
                 })
                 .catch(error => {

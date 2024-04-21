@@ -13,7 +13,7 @@
             this.formSubmit();
         },
 
-        //고백 검사 함수 정의
+        //공백 검사 함수 정의
         emptyChkFn : function () {
             let valid = true;
             const form = document.getElementById("updateForm")

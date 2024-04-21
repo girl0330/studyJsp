@@ -58,9 +58,9 @@ public class BoardServiceImpl implements BoardService{
 
         Map<String, Object> map = new HashMap<>();
         //info가 없을때
-        MemberDTO userInfo = (MemberDTO) session.getAttribute("userInfo");
-
-        System.out.println("memberNo:::   "+userInfo);
+//        MemberDTO userInfo = (MemberDTO) session.getAttribute("userInfo");
+//
+//        System.out.println("memberNo:::   "+userInfo);
 
         boardMapper.boardUpdate(boardDTO);
 

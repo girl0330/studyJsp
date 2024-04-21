@@ -5,6 +5,7 @@ import com.march.studyjsp.domain.board.BoardDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +95,26 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberDTO memberDetail(Long id) {
         return memberMapper.memberDetail(id);
+    }
+
+    //회원 프로필
+    @Override
+    public MemberDTO findPro(int memberNo) {
+        System.out.println("프로필 서비스");
+        return memberMapper.findPro(memberNo);
+    }
+
+    //회원 프로필 수정
+    @Override
+    public Map<String, Object> memberUpdate(MemberDTO memberDTO, HttpSession session) {
+        System.out.println("프로필 수정 서비스");
+        Map<String, Object> map = new HashMap<>();
+
+        memberMapper.memberUpdate(memberDTO);
+        map.put("code","success");
+        map.put("message", "회원정보 수정이 완료되었습니다.");
+        System.out.println("수정된 데이터"+map);
+        return map;
     }
 
 ////로그인
