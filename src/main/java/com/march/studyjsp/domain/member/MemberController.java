@@ -37,23 +37,27 @@ public class MemberController {
     @PostMapping("/memberUpdate")
     @ResponseBody
     public Map<String, Object> memberUpdate(MemberDTO memberDTO, HttpSession session) {
-//        MemberDTO userI = (MemberDTO) session.getAttribute("userInfo");
-//        MemberDTO DTO = new MemberDTO();
-//        DTO = userI.getMemberNo()
         MemberDTO userI = (MemberDTO) session.getAttribute("userInfo");
-
-        // 새로운 MemberDTO 객체 생성하여 memberNo 설정
-        MemberDTO DTO = new MemberDTO();
+        System.out.println("데이터 확인 :: " +userI.getMemberNo());
         memberDTO.setMemberNo(userI.getMemberNo());
-        System.out.println("새로운 DTO"+ DTO);
-
-        // 변경된 memberId를 serviceImpl로 보내기
-//        Map<String, Object> result = serviceImpl.memberUpdate(DTO, session);
 
         System.out.println("수정할 data::: "+memberDTO);
         Map<String, Object> map = memberService.memberUpdate(memberDTO, session);
-        System.out.println("map''''");
         System.out.println("회원 수정 완료");
+        return map;
+    }
+
+    //비밀번호 변경
+    @PostMapping("/changePw")
+    @ResponseBody
+    public Map<String, Object> changePassword (MemberDTO memberDTO, HttpSession session) {
+        MemberDTO userI = (MemberDTO) session.getAttribute("userInfo");
+        System.out.println("데이터 확인 :: " +userI.getMemberNo());
+        memberDTO.setMemberNo(userI.getMemberNo());
+
+        System.out.println("입력한 데이터 확인 : "+memberDTO);
+        Map<String, Object> map = memberService.changePassword(memberDTO, session);
+        System.out.println("비밀번호 변경 완료");
         return map;
     }
 

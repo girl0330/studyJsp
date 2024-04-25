@@ -27,6 +27,9 @@ public interface MemberService {
     //회원 프로필 수정
     Map<String, Object> memberUpdate(MemberDTO memberDTO, HttpSession session);
 
+    //비밀번호 변경
+    Map<String, Object> changePassword(MemberDTO memberDTO, HttpSession session);
+
 
     //회원가입
 //    Map<String, Object> makeUser(MemberDTO userDTO);

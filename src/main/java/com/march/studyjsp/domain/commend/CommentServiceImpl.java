@@ -23,3 +23,6 @@ public class CommentServiceImpl implements CommentService{
         return commentMapper.findAll(boardNo);
     }
 }
+
+
+

@@ -33,4 +33,12 @@ public interface MemberMapper {
 
     //회원 프로필 수정
     void memberUpdate(MemberDTO memberDTO);
+
+    //현재 비밀번호 확인
+    int nowPassCheck(MemberDTO memberDTO);
+
+    //비밀번호 변경하기
+    void changePassword(MemberDTO memberDTO);
+
+
 }

@@ -120,4 +120,19 @@
             mobile_number = #{mobileNumber}
         WHERE member_no = #{memberNo}
     </update>
+
+    <!--현재비밀번호 확인-->
+    <select id="nowPassCheck" parameterType="com.march.studyjsp.domain.member.MemberDTO" resultType="int">
+        SELECT
+            password
+        FROM member_info
+        WHERE member_no = #{memberNo}
+    </select>
+
+    <!--비밀번호 수정-->
+    <update id="changePassword" parameterType="com.march.studyjsp.domain.member.MemberDTO">
+        UPDATE member_info
+        SET password = #{password}
+        WHERE member_no = #{memberNo}
+    </update>
 </mapper>

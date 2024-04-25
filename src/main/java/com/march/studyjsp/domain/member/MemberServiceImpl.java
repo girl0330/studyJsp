@@ -113,7 +113,34 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.memberUpdate(memberDTO);
         map.put("code","success");
         map.put("message", "회원정보 수정이 완료되었습니다.");
-        System.out.println("수정된 데이터"+map);
+        System.out.println("map에 담긴 데이터"+map);
+        return map;
+    }
+
+    //프로필 비밀번호 변경
+    @Override
+    public Map<String, Object> changePassword(MemberDTO memberDTO, HttpSession session) {
+        System.out.println("비밀번호 변경 서비스임플");
+        Map<String, Object> map = new HashMap<>();
+
+        //비밀번호 수정(현재 비번-> 일치하는지 확인, 바꿀 비번->저장// 바뀐 비밀번호를 dto에 담아서 보내기 )
+
+        System.out.println("-------------------");
+        int nowPassCheck = memberMapper.nowPassCheck(memberDTO);
+        System.out.println("번호확인''''''''''''"+nowPassCheck);
+        // 현재비번이 틀리면
+        if (nowPassCheck < 1) {
+            map.put("code","error");
+            map.put("message", "비밀번호를 확인해주세요");
+            System.out.println("map 정보"+map);
+            return map;
+        }
+
+        //현재비밀번호가 맞으면 비밀번호 변경
+        memberMapper.changePassword(memberDTO);
+        map.put("code","success");
+        map.put("message", "비밀번호 수정이 완료되었습니다.");
+        System.out.println("확인"+memberDTO);
         return map;
     }
 

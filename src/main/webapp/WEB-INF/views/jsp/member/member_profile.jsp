@@ -12,7 +12,14 @@
             //전송
             this.formSubmit1();
         },
-        //전송
+        passwordInit : function () {
+            //공백 검사
+            if(!this.emptyChkFn1()) {
+                return;
+            }
+            //수정 전송
+            this.passwordChange();
+        },
 
         //공백 검사
         emptyChkFn1 : function() {
@@ -34,6 +41,38 @@
             return valid;
         },
 
+        passwordChange : function () {
+            alert("비번변경클릭")
+            const form = document.getElementById("changePwForm");
+            const formData = new FormData(form);
+
+            for (const pair of formData.entries()) {
+                console.log(pair[0]+' , '+pair[1])
+            }
+
+            const url = "/member/changePw";
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Received data:', data);
+                    if (data.code === 'success') {
+                        alert(data.message);
+                        location.href = '/member/profile'
+                    }
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        },
 
         formSubmit1: function () {
             alert("클릭")
@@ -73,6 +112,9 @@
     document.addEventListener('DOMContentLoaded', function () {
         document.getElementById("button_profile_changes").addEventListener("click", function () {
             update.init();
+        });
+        document.getElementById("button_password_changes").addEventListener("click", function () {
+            update.passwordInit();
         });
     });
 
@@ -210,36 +252,31 @@
 
                         <div class="tab-pane fade pt-3" id="profile-change-password">
                             <!-- Change Password Form -->
-                            <form>
+                            <form id="changePwForm" name="changePwForm">
 
                                 <div class="row mb-3">
-                                    <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current
-                                        Password</label>
+                                    <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="password" type="password" class="form-control"
-                                               id="currentPassword">
+                                        <input name="password" type="password" class="form-control" id="currentPassword">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New
-                                        Password</label>
+                                    <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="newpassword" type="password" class="form-control" id="newPassword">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New
-                                        Password</label>
+                                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="renewpassword" type="password" class="form-control"
-                                               id="renewPassword">
+                                        <input name="renewpassword" type="password" class="form-control"   id="renewPassword">
                                     </div>
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Change Password</button>
+                                    <button type="button" class="btn btn-primary" id="button_password_changes" name="button_password_changes">Change Password</button>
                                 </div>
                             </form><!-- End Change Password Form -->
 
