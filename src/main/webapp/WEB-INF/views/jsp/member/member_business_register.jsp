@@ -7,9 +7,6 @@
 
         //최초실행 함수 정의
         init : function () {
-            if(!this.emptyChkFn() || !this.checkFn()) {
-                return;
-            }
 
             // register submit 실행
             this.formSubmit();
@@ -51,44 +48,37 @@
 
         // 전송 함수 정의
         formSubmit   : function() {
-            const form = document.getElementById('insertForm');
-            const formData = new FormData(form);
+            const formData = $("#insertForm").serializeArray();
 
-            // FormData 객체 확인
-            for (const pair of formData.entries()) {
-                console.log("삥뽕;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;" + pair[0] + ', ' + pair[1]);
-            }
+            console.log("x:::  "+JSON.stringify(formData));
+
+            // JSON 객체로 변환
+            var jsonData = {};
+            $.each(formData, function() {
+                jsonData[this.name] = this.value;
+            });
+            // 체크박스 값 추가
+            jsonData['terms'] = $('#terms').is(':checked');
+
 
             // fetch 요청 생성
-            const url = "/member/registerInsert"; // 컨트롤러 URL을 여기에 입력하세요
+            const url = "/user/signupUserInsert"; // 컨트롤러 URL을 여기에 입력하세요
 
-            //비동기통신 es6에 적용된 방식
-            fetch(url, {
-                method: 'POST',
-                body: formData //전송할 데이터
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+            $.ajax({
+                url: url, // Spring 컨트롤러 URL
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(jsonData), // JSON 형식으로 데이터 전송
+                success: function(response) {
+                    // 성공적으로 서버로부터 응답을 받았을 때 실행할 코드
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    // 오류 발생 시 실행할 코드
+                    console.error(error);
                 }
-                return response.json(); // JSON 형식의 응답 데이터를 파싱하여 반환하는 Promise를 반환
-            })
-            .then(data => {
-                // 데이터 처리
-                console.log('Data uploaded:', data);
-                // if (data.code === 'test') {
-                //   alert(data.message);
-                if(data.code === 'error') {
-                    alert(data.message);
-                } else {
-                    alert(data.message);
-                    location.href='/member/login';
-                }
-            })
-            .catch(error => {
-                // 오류 처리
-                console.error('There was a problem with the fetch operation:', error);
             });
+
         }
     }
 
@@ -116,29 +106,25 @@
                         </div><!-- End Logo -->
 
                         <div class="card mb-3">
-
                             <div class="card-body">
-
                                 <div class="pt-4 pb-2">
-                                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                                    <h5 class="card-title text-center pb-0 fs-4">기업회원가입</h5>
                                     <p class="text-center small">Enter your personal details to create account</p>
                                 </div>
 
                                 <form class="row g-3 needs-validation" id="insertForm" name="insertForm">
+                                    <input type="hidden" name="gradeCode" id="gradeCode" value="20">
+                                    <div class="col-12">
+                                        <label for="phoneNumber" class="form-label">휴대폰</label>
+                                        <div class="input-group has-validation">
+                                            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" data-name="휴대폰" >
+                                        </div>
+                                    </div>
+
                                     <div class="col-12">
                                         <label for="userId" class="form-label">아이디</label>
-                                        <input type="text" class="form-control" name="userId" id="userId" data-name="아이디" >
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label for="email" class="form-label">이메일</label>
-                                        <input type="text" class="form-control" name="email" id="email" data-name="이메일">
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label for="name" class="form-label">이름</label>
                                         <div class="input-group has-validation">
-                                            <input type="text" class="form-control" name="name" id="name" data-name="이름" >
+                                            <input type="text" class="form-control" name="userId" id="userId" data-name="아이디" >
                                         </div>
                                     </div>
 
@@ -148,23 +134,19 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="nickname" class="form-label">닉네임</label>
-                                        <div class="input-group has-validation">
-                                            <input type="text" class="form-control" name="nickname" id="nickname" data-name="닉네임" >
-                                        </div>
+                                        <label for="password2" class="form-label">비밀번호 재입력</label>
+                                        <input type="text" class="form-control" name="password2" id="password2" data-name="비밀번호 재입력">
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="phoneNumber" class="form-label">전화 번호</label>
-                                        <div class="input-group has-validation">
-                                            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" data-name="전화 번호" >
-                                        </div>
+                                        <label for="email" class="form-label">이메일</label>
+                                        <input type="text" class="form-control" name="email" id="email" data-name="이메일">
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="mobileNumber" class="form-label">핸드폰 번호</label>
+                                        <label for="businessRegistrationNumber" class="form-label">사업자번호</label>
                                         <div class="input-group has-validation">
-                                            <input type="text" class="form-control" name="mobileNumber" id="mobileNumber" data-name="핸드폰 번호" >
+                                            <input type="text" class="form-control" name="businessRegistrationNumber" id="businessRegistrationNumber" data-name="사업자번호" >
                                         </div>
                                     </div>
 

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.march.studyjsp.domain.dailyJop.user.UserMapper">
+<!--회원가입-->
+    <insert id="createUser" parameterType="com.march.studyjsp.domain.dailyJop.user.UserDTO">
+        INSERT INTO user_info (
+            user_id,
+            password,
+            name,
+            birthday,
+            gender_code,
+            email,
+            phone_number,
+            business_registration_number,
+            grade_code
+        )
+        VALUES (
+                   #{userId},
+                   #{password},
+                   #{name},
+                   #{birthday},
+                   #{genderCode},
+                   #{email},
+                   #{phoneNumber},
+                   #{businessRegistrationNumber},
+                   #{gradeCode}
+               )
+    </insert>
+
+<!--    아이디 중복 검사-->
+    <select id="idCheck" parameterType="com.march.studyjsp.domain.dailyJop.user.UserDTO" resultType="int">
+        SELECT
+            count(*) AS countId
+        FROM
+            user_info
+        WHERE
+            user_id = #{userId}
+    </select>
+
+<!--    이메일 중복 검사   -->
+    <select id="emailCheck" parameterType="com.march.studyjsp.domain.dailyJop.user.UserDTO" resultType="int">
+        SELECT
+            count(*) AS countEmail
+        FROM
+            user_info
+        WHERE
+            email = #{email}
+    </select>
+
+    <!--로그인-->
+    <select id="findUserInfo" parameterType="com.march.studyjsp.domain.dailyJop.user.UserDTO" resultType="com.march.studyjsp.domain.dailyJop.user.UserDTO">
+        SELECT
+            uuid,
+              user_id,
+              password,
+              name,
+              birthday,
+              gender_code,
+              age,
+              email,
+              phone_number,
+              business_registration_number,
+              grade_code,
+              registrar_id,
+              modifier_id
+        FROM user_info
+        WHERE user_id = #{userId}
+          AND password = #{password}
+    </select>
+
+    <!--상세정보-->
+    <select id="findId" parameterType="com.march.studyjsp.domain.dailyJop.user.UserDTO" resultType="com.march.studyjsp.domain.dailyJop.user.UserDTO">
+        SELECT
+            user_id,
+            password,
+            name,
+            birthday,
+            email,
+            phone_number
+        FROM user_info
+        WHERE   user_id = #{userId}
+    </select>
+
+    <update id="userUpdate" parameterType="com.march.studyjsp.domain.dailyJop.user.UserDTO">
+        UPDATE user_info
+        SET user_id = #{userId},
+             password = #{password},
+             name = #{name},
+             birthday = #{birthday},
+             email = #{email},
+             phone_number = #{phoneNumber}
+        WHERE uuid = #{uuid}
+    </update>
+
+    <select id="getHashedPassword" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT password
+        FROM user_info
+        WHERE user_id = #{userId}
+    </select>
+</mapper>

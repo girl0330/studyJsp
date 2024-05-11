@@ -54,7 +54,7 @@ dependencies {
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 
     //BCrypt라이브러리
-    implementation 'org.springframework.security:spring-security-crypto:5.0.10.RELEASE'
+    implementation 'org.springframework.security:spring-security-crypto'
 }
 
 tasks.named('test') {
