@@ -3,10 +3,7 @@ package com.march.studyjsp.domain.dailyJop.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -41,25 +38,43 @@ public class UserController {
 
     // 회원등록 api
     @PostMapping("/signupUserInsert")
-    public Map<Object, Object> userSignup(@RequestBody UserDTO userDTO, Model model) {
+    @ResponseBody //데이터를 반환할 때
+    public Map<Object, Object> userSignup(@RequestBody UserDTO userDTO, HttpSession session) {
         System.out.println("=====회원등록====" + userDTO);
         Map<Object, Object> map = userService.createUser(userDTO);
         System.out.println("map확인 " +map);
+        //session.setAttribute("map",map);
+        //System.out.println("session확인;;;"+session);
         return map;
     }
 
     //로그인
     @GetMapping("/login")
-    public String loginView() {
+    public String loginView(Model model) {
         System.out.println("로그인 화면1");
+
         return "jsp/member/member_new_login_choice";
     }
 
-    @PostMapping("/loginUser")
-    public Map<Object, Object> loginUser(@RequestBody UserDTO userDTO, HttpSession session) {
-        System.out.println("====로그인====");
+    @PostMapping("/personalLoginUser")
+    public Map<Object, Object> personalLoginUser(@RequestBody UserDTO userDTO) {
+        System.out.println("====개인 로그인====");
 
-        Map<Object, Object> map = userService.UserLogin(userDTO);
+        Map<Object, Object> map = userService.personalUserService(userDTO);
+
+        System.out.println("로그인 result;;;;");
+        if("error".equals(map.get("code"))) {
+            return map;
+        }
+        System.out.println("hey!!!!!"+map);
+        return map;
+    }
+
+    @PostMapping("/businessLoginUser")
+    public Map<Object, Object> businessLoginUser(@RequestBody UserDTO userDTO) {
+        System.out.println("====기업 로그인====");
+
+        Map<Object, Object> map = userService.businessUserService(userDTO);
 
         System.out.println("로그인 정보 확인;;;;"+map);
         return map;
@@ -72,25 +87,6 @@ public class UserController {
         session.invalidate();
         return "/";
     }
-
-    //회원정보 상세보기
-//    @GetMapping("/profile")
-//    public String profileView () {
-//        System.out.println("====회원정보====");
-//
-//        UserDTO userDTO = new UserDTO();
-//        userDTO.setUserId("qwer1");
-//        System.out.println(userDTO);
-//
-//        if (userDTO != null) {
-//            System.out.println("데이터 있음");
-//            UserDTO user = userService.findUser(userDTO);
-//            System.out.println(user);
-//            return "jsp/user/user_profile";
-//        } else {
-//            return "redirect:/user/login";
-//        }
-//    }
 
     @GetMapping("/profile")
         public String profileView (HttpSession session, Model model) {
@@ -118,6 +114,7 @@ public class UserController {
         return infomation;
     }
 
+
 //    @PostMapping("/update")
 //    public Map<Object, Object> userUpdate (UserDTO userDTO, HttpSession session) {
 //        System.out.println("====회원정보 수정====");
@@ -125,5 +122,25 @@ public class UserController {
 //        userDTO.setUuid(userInfo.getUuId()); //정보에서 id를 가져와서 dto에 넣기
 //        Map<Object, Object> infomation = userService.userUpdate(userDTO);
 //        return infomation;
+//    }
+
+
+    //회원정보 상세보기
+//    @GetMapping("/profile")
+//    public String profileView () {
+//        System.out.println("====회원정보====");
+//
+//        UserDTO userDTO = new UserDTO();
+//        userDTO.setUserId("qwer1");
+//        System.out.println(userDTO);
+//
+//        if (userDTO != null) {
+//            System.out.println("데이터 있음");
+//            UserDTO user = userService.findUser(userDTO);
+//            System.out.println(user);
+//            return "jsp/user/user_profile";
+//        } else {
+//            return "redirect:/user/login";
+//        }
 //    }
 }

@@ -2,16 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script>
-    let persnalLogin = {
+    let login1 = {
 
         //최조실행 함수 정의
-        init: function () {
+        personalInit: function () {
             //emptyChkFn 실행
             if (!this.emptyChkFn()) {
                 return;
             }
             // register submit 실행
-            this.formSubmit();
+            this.personalFormSubmit();
         },
 
         // 공백 검사 함수 정의
@@ -32,36 +32,105 @@
             return valid;
         },
 
-        //전송 함수 정의
-        formSubmit: function () {
+        //개인폼 전송 함수 정의
+        personalFormSubmit: function () {
+            alert("개인 로그인")
             const formData = $("#personalLoginForm").serializeArray();
 
-            console.log("formData;;; " +JSON.stringify(formData));
+            console.log("formData;;; " + JSON.stringify(formData));
 
             // JSON 객체로 변환
             var jsonData = {};
-            $.each(formData, function() {
+            $.each(formData, function () {
                 jsonData[this.name] = this.value;
             });
 
-            const url = "/user/loginUser";
+            const url = "/user/personalLoginUser";
 
             $.ajax({
                 url: url, // Spring 컨트롤러 URL
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(jsonData), // JSON 형식으로 데이터 전송
-                success: function(response) {
+                success: function (response) {
                     // 성공적으로 서버로부터 응답을 받았을 때 실행할 코드
                     console.log(response);
                     if (response.code === 'error') {
                         alert(response.message);
                     } else {
                         alert(response.message);
-                        lacation.href='/user/login'
+                        lacation.href = '/user/login'
                     }
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
+                    // 오류 발생 시 실행할 코드
+                    console.error(error);
+                }
+            });
+        }
+    }
+
+    let login2 = {
+
+        //최조실행 함수 정의
+        businessInit: function () {
+            //emptyChkFn 실행
+            if (!this.emptyChkFn()) {
+                return;
+            }
+            // register submit 실행
+            this.businessFormSubmit();
+        },
+
+        // 공백 검사 함수 정의
+        emptyChkFn: function () {
+            let valid = true;
+            const form = document.getElementById("businessLoginForm");
+            const inputs = form.querySelectorAll("input[type='text']");
+            for (const input of inputs) {
+                const removeBlankData = input.value.replace(/\s*/, "");
+                if (removeBlankData === "") {
+                    let text = input.dataset.name;
+                    alert(text + "은/는 필수로 입력 값입니다.")
+                    input.focus();
+                    valid = false;
+                    break;
+                }
+            }
+            return valid;
+        },
+
+        // 기업 폼 전송 함수 정의
+        businessFormSubmit: function () {
+            alert("기업 로그인")
+            const formData = $("#businessLoginForm").serializeArray();
+
+            console.log("formData;;; " + JSON.stringify(formData));
+
+            // JSON 객체로 변환
+            var jsonData = {};
+            $.each(formData, function () {
+                jsonData[this.name] = this.value;
+            });
+
+            const url = "/user/businessLoginUser";
+
+            $.ajax({
+                url: url, // Spring 컨트롤러 URL
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(jsonData), // JSON 형식으로 데이터 전송
+                success: function (response) {
+                    // 성공적으로 서버로부터 응답을 받았을 때 실행할 코드
+                    console.log(response);
+                    if (response.code === 'error') {
+                        alert(response.message);
+                    } else {
+                        alert(response.message);
+                        lacation.href = '/user/login'
+                    }
+                },
+                error: function (xhr, status, error) {
                     // 오류 발생 시 실행할 코드
                     console.error(error);
                 }
@@ -71,7 +140,13 @@
 
     document.addEventListener('DOMContentLoaded', function (){
         document.getElementById("personalButtonLogin").addEventListener("click",function () {
-            persnalLogin.init();
+            login1.personalInit();
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function (){
+        document.getElementById("businessButton_login").addEventListener("click",function () {
+            login2.businessInit();
         });
     });
 
@@ -125,8 +200,8 @@
 
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="true" name="personalCheckbox" id="personalCheckbox" data-name="체크박스">
-                                        <label class="form-check-label" for="personalCheckbox">Remember me</label>
+                                        <input class="form-check-input" type="checkbox" value="true" name="Checkbox" id="Checkbox" data-name="체크박스">
+                                        <label class="form-check-label" for="Checkbox">Remember me</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -142,26 +217,26 @@
 
                         <div class="tab-pane fade pt-3" id="business_login">
                             <!-- Change Password Form -->
-                            <form class="row g-3 needs-validation"  id="loginForm" name="loginForm">
+                            <form class="row g-3 needs-validation"  id="businessLoginForm" name=businessLoginForm">
 
                                 <div class="col-12">
-                                    <label for="businessUserId" class="form-label">id</label>
+                                    <label for="userId" class="form-label">id</label>
                                     <div class="input-group has-validation">
-                                        <input type="text" class="form-control" name="businessUserId" id="businessUserId" required>
+                                        <input type="text" class="form-control" name="userId" id="userId" required>
                                         <div class="invalid-feedback">Please enter your username.</div>
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="businessPassword" class="form-label">Password</label>
-                                    <input type="text" class="form-control" name="businessPassword" Id="businessPassword" required>
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="text" class="form-control" name="password" Id="password" required>
                                     <div class="invalid-feedback">Please enter your password!</div>
                                 </div>
 
                                 <div class="col-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="true" name="businessCheckbox" id="businessCheckbox" data-name="체크박스">
-                                        <label class="form-check-label" for="businessCheckbox">Remember me</label>
+                                        <input class="form-check-input" type="checkbox" value="true" name="Checkbox" id="Checkbox" data-name="체크박스">
+                                        <label class="form-check-label" for="Checkbox">Remember me</label>
                                     </div>
                                 </div>
                                 <div class="col-12">

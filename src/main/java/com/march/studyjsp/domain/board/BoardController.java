@@ -21,18 +21,19 @@ public class BoardController {
 
     //글쓰기 페이지
     @GetMapping ("/boardWrite")
-    public String showBoardWrite(HttpSession session) {
+    public String showBoardWrite() {
         System.out.println("글작성 페이지");
+        return "jsp/board/board_write";
         // HttpSession에서 로그인 정보 확인
-        Object userInfo = session.getAttribute("userInfo");
-        if (userInfo != null) {
-            // 로그인한 사용자 정보가 있다면 해당 사용자로 게시글 작성 페이지로 이동
-            return "jsp/board/board_write"; // 여기에 실제 게시글 작성 페이지 경로를 반환하십시오.
-        } else {
-            // 로그인한 사용자 정보가 없다면 로그인 페이지로 리다이렉트 또는 예외 처리
-            return "redirect:/member/login"; // 로그인 페이지로 리다이렉트하는 경우
-            // 또는 throw new UnauthorizedException(); // 예외를 던지는 등의 처리
-        }
+//        Object userInfo = session.getAttribute("userInfo");
+//        if (userInfo != null) {
+//            // 로그인한 사용자 정보가 있다면 해당 사용자로 게시글 작성 페이지로 이동
+//            return "jsp/memeber/board_write"; // 여기에 실제 게시글 작성 페이지 경로를 반환하십시오.
+//        } else {
+//            // 로그인한 사용자 정보가 없다면 로그인 페이지로 리다이렉트 또는 예외 처리
+//            return "redirect:/member/member_new_login_choice"; // 로그인 페이지로 리다이렉트하는 경우
+//            // 또는 throw new UnauthorizedException(); // 예외를 던지는 등의 처리
+//        }
     }
 
     //글 등록

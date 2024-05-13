@@ -6,9 +6,11 @@ public interface UserService {
     //회원가입
     Map<Object, Object> createUser(UserDTO userDTO);
 
-    //로그인
-    Map<Object, Object> UserLogin(UserDTO userDTO);
+    //개인 로그인
+    Map<Object, Object> personalUserService(UserDTO userDTO);
 
+    //기업 로그인
+    Map<Object, Object> businessUserService(UserDTO userDTO);
 
 
     //회원정보
@@ -17,4 +19,5 @@ public interface UserService {
 
     // 회원수정
     Map<Object, Object> userUpdate(UserDTO userDTO);
+
 }

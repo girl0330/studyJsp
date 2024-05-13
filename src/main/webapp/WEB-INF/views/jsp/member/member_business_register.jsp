@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
 
 <script>
     // 로그인 실행
@@ -7,6 +8,15 @@
 
         //최초실행 함수 정의
         init : function () {
+            if (!this.emptyChkFn()) {
+                return;
+            }
+            if (!this.checkFn()) {
+                return;
+            }
+            if (!this.idValidation()) {
+                return;
+            }
 
             // register submit 실행
             this.formSubmit();
@@ -31,6 +41,87 @@
             return valid;
         },
 
+        idValidation : function () {
+            // 입력창 정보 가져오기
+            let valid = true;
+            const userPassword1 = $('#password').val(); // 비밀번호1
+            const userPassword2 = $('#password2').val(); // 비밀번호2
+            const userId = $('#userId').val();
+            const businessRegistrationNumber = $('#businessRegistrationNumber').val();
+            const email = $('#email').val();
+            const phone = $('#phoneNumber').val();
+
+            console.log("id확인"+ userId);
+            console.log("데이터 확인"+userPassword1+","+userPassword2)
+
+            // id validation
+            let idRegex = /^[a-zA-Z0-9]+$/;
+            if (!idRegex.test(userId)) {
+                alert("아이디 형식을 확인해주세요")
+                valid = false;
+                return valid;
+            }
+            console.log("ok8");
+            if (userId.length > 12 || userId.length < 2) {
+                alert("아이디를 2~12자로 사용해주세요")
+                valid = false;
+                return valid;
+            }
+            console.log("ok7");
+
+            // pw validation
+            let passwordRegex = /^[a-zA-z0-9.@$!%*?&]+$/; // 정규표현식
+            if (!passwordRegex.test(userPassword1)) {
+                alert(" 영문 대소문자, 숫자, 그리고 특수 문자가 반드시 하나 이상 포함해야합니다.")
+                valid = false;
+                return valid;
+            }
+            console.log("ok6");
+
+            if (userPassword1.length > 15 || userPassword1.length < 8) {
+                alert("비밀번호를 8~15자로 사용해주세요")
+                valid = false;
+                return valid;
+            }
+            console.log("ok5");
+
+            if (userPassword1 !== userPassword2) {
+                alert("비밀번호가 일치 하지 않습니다.")
+                valid = false;
+                return valid;
+            }
+            console.log("ok4");
+
+            // businessRegistrationNumber validation
+            letbusinessRNumberRegex = /^\d{10}$/;
+            if (!letbusinessRNumberRegex.test(businessRegistrationNumber)) {
+                alert("'-'을 제외한 10자로 입력해주세요")
+                valid = false;
+                return valid;
+            }
+            console.log("ok3");
+
+            // email validation
+            let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                alert("비밀번호 형식을 확인해주세요")
+                valid = false;
+                return valid;
+            }
+            console.log("ok2");
+
+            // phone validation
+            let phoneRegex = /^010\d{4}\d{4}$/;
+            if (!phoneRegex.test(phone)) {
+                alert("비밀번호 형식을 확인해주세요")
+                valid = false;
+                return valid;
+            }
+            console.log("ok1");
+            console.log(valid);
+            return valid;
+        },
+
         // 체크 검사 함수 정의
         checkFn : function () {
             let valid = true;
@@ -48,6 +139,7 @@
 
         // 전송 함수 정의
         formSubmit   : function() {
+            alert("test11111")
             const formData = $("#insertForm").serializeArray();
 
             console.log("x:::  "+JSON.stringify(formData));
@@ -69,9 +161,16 @@
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(jsonData), // JSON 형식으로 데이터 전송
-                success: function(response) {
+                success: function(data) {
+                    console.log(":?????    "+JSON.stringify(data));
+                    if(data.code === "error") {
+                        alert(data.message);
+                    }else {
+                        alert(data.message);
+                        location.href='/user/login'
+                    }
                     // 성공적으로 서버로부터 응답을 받았을 때 실행할 코드
-                    console.log(response);
+                    //console.log(response);
                 },
                 error: function(xhr, status, error) {
                     // 오류 발생 시 실행할 코드

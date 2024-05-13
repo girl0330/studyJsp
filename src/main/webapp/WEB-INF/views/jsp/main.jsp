@@ -2,7 +2,7 @@
 
 <script>
     function go_boardWrite() {
-        window.location.href = "board/boardWrite"
+        window.location.href = "form/resume_write.jsp"
     }
 
     function go_boardList() {
@@ -40,7 +40,7 @@
     <h1>Dashboard</h1>
     <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a onclick="go_boardWrite()" href="board/boardWrite">글쓰기</a></li>
+                <li class="breadcrumb-item"><a onclick="go_boardWrite()" href="form/write">글쓰기</a></li>
                 <li class="breadcrumb-item"><a onclick="go_boardList()" href="board/boardList">글목록</a></li>
                 <li class="breadcrumb-item active"><a onclick="go_userMemberList()" href="member/memberList">회워목록 조회</a></li>
                 <li class="breadcrumb-item"><a class="logout-link" onclick="logout()" id="logout_button" href="#">로그아웃</a></li>
