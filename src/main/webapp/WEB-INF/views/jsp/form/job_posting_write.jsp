@@ -8,7 +8,7 @@
         <h1>Form Elements</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item">Forms</li>
                 <li class="breadcrumb-item active">Elements</li>
             </ol>
@@ -17,204 +17,139 @@
 
     <section class="section">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-8">
 
                 <div class="card">
                     <div class="card-body">
                         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                                <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                                <div class="tab-pane fade show active profile-overview" id="profile-overview" role="tabpanel">
-
-                                    <h5 class="card-title">Profile Details</h5>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                                        <div class="col-lg-9 col-md-8">Kevin Anderson</div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Company</div>
-                                        <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Job</div>
-                                        <div class="col-lg-9 col-md-8">Web Designer</div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Country</div>
-                                        <div class="col-lg-9 col-md-8">USA</div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Address</div>
-                                        <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Phone</div>
-                                        <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-4 label">Email</div>
-                                        <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <h5 class="card-title">General Form Elements</h5>
-
-                            <!-- General Form Elements -->
+                            <h5 class="card-title"> 채용정보 </h5>
                             <form>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Text</label>
+                                <!-- General Form Elements -->
+                                <div class="row mb-3"> <%--필수입력 40자 이내--%>
+                                    <label for="postingTitle" class="col-sm-2 col-form-label">공고제목</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                    <div class="col-sm-10">
-                                        <input type="email" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputNumber" class="col-sm-2 col-form-label">Number</label>
-                                    <div class="col-sm-10">
-                                        <input type="number" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
-                                    <div class="col-sm-10">
-                                        <input class="form-control" type="file" id="formFile">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
-                                    <div class="col-sm-10">
-                                        <input type="date" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputTime" class="col-sm-2 col-form-label">Time</label>
-                                    <div class="col-sm-10">
-                                        <input type="time" class="form-control">
+                                        <input type="text" class="form-control" id="postingTitle" name="postingTitle" data-name="공고제목">
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <label for="inputColor" class="col-sm-2 col-form-label">Color Picker</label>
-                                    <div class="col-sm-10">
-                                        <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#4154f1" title="Choose your color">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputPassword" class="col-sm-2 col-form-label">Textarea</label>
-                                    <div class="col-sm-10">
-                                        <textarea class="form-control" style="height: 100px"></textarea>
-                                    </div>
-                                </div>
-                                <fieldset class="row mb-3">
-                                    <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                                    <div class="col-sm-10">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                                            <label class="form-check-label" for="gridRadios1">
-                                                First radio
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                                            <label class="form-check-label" for="gridRadios2">
-                                                Second radio
-                                            </label>
-                                        </div>
-                                        <div class="form-check disabled">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios" value="option" disabled>
-                                            <label class="form-check-label" for="gridRadios3">
-                                                Third disabled radio
-                                            </label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <div class="row mb-3">
-                                    <legend class="col-form-label col-sm-2 pt-0">Checkboxes</legend>
-                                    <div class="col-sm-10">
-
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck1">
-                                            <label class="form-check-label" for="gridCheck1">
-                                                Example checkbox
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-                                            <label class="form-check-label" for="gridCheck2">
-                                                Example checkbox 2
-                                            </label>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Disabled</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" value="Read only / Disabled" disabled>
-                                    </div>
-                                </div>
-
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Select</label>
+                                <div class="row mb-3"> <!--필수입력/for= "business_type" / select - option사용방법 찾아보기-->
+                                    <label class="col-sm-2 col-form-label" >업종</label>
                                     <div class="col-sm-10">
                                         <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            <option selected>선택하기</option>
+                                            <option value="1">IT/인터넷</option>
+                                            <option value="2">경영/사무/금융/보험</option>
+                                            <option value="3">미용/여행/숙박/음식/경비/돌봄/청소</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Multi Select</label>
+                                <div class="row mb-3"> <!--필수입력/ for= "employment_type"-->
+                                    <label class="col-form-label col-sm-2 pt-0">고용 형태</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" multiple aria-label="multiple select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+
+                                        <input class="form-check-input" type="checkbox" id="check1" value="아르바이트">
+                                        <label class="form-check-label" for="check1">
+                                            아르바이트
+                                        </label>
+                                        <input class="form-check-input" type="checkbox" id="check2" value="정규직">
+                                        <label class="form-check-label" for="check2">
+                                            정규직
+                                        </label>
+
+                                        <input class="form-check-input" type="checkbox" id="check3" value="위촉직 ( 프리랜서 )">
+                                        <label class="form-check-label" for="check3">
+                                            위촉직 ( 프리랜서 )
+                                        </label>
+
+                                        <input class="form-check-input" type="checkbox" id="check4" value="교육생 / 연수생">
+                                        <label class="form-check-label" for="check4">
+                                            교육생 / 연수생
+
+                                        </label><input class="form-check-input" type="checkbox" id="check5" value="계약직">
+                                        <label class="form-check-label" for="check5">
+                                            계약직
+                                        </label>
+
+                                        <input class="form-check-input" type="checkbox" id="check6" value="인턴직">
+                                        <label class="form-check-label" for="check6">
+                                            인턴직
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3"> <!--필수입력/ number_of_staff-->
+                                    <label class="col-form-label col-sm-2 pt-0">고용 모집인원</label>
+                                    <div class="col-sm-10">
+                                        <form>
+                                            <input class="form-check-input" type = "radio" name = "subject" value = "10명 미만"> 0명(10명 미만)
+                                            <input class="form-check-input" type = "radio" name = "subject" value = "1명"> 1명
+                                            <input class="form-check-input" type = "radio" name = "subject" value = "100명 미만"> 00명(100명 미만)
+                                            <div>
+                                                <input class="form-check-input" type = "radio" name = "subject" value = "직접입력">
+                                                <label class="form-check-label" for="check">직접입력</label>
+                                                <input type="text" class="col-sm-5 form-control" id="check" name="check">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3"> <!--필수입력/ working_hours-->
+                                    <label class="col-form-label col-sm-2 pt-0">근무기간</label>
+                                    <div class="col-sm-10">
+                                        <form>
+                                            <input class="form-check-input" type = "radio" name = "subject" value = "1년이상"> 1년이상
+                                            <input class="form-check-input" type = "radio" name = "subject" value = "6개월 ~ 1년"> 6개월 ~ 1년
+                                            <input class="form-check-input" type = "radio" name = "subject" value = "3개월 ~ 6년"> 3개월 ~ 6년
+                                            <input class="form-check-input" type = "radio" name = "subject" value = "1개월 ~ 3개월"> 1개월 ~ 3개월
+                                            <input class="form-check-input" type = "radio" name = "subject" value = "1주일 ~ 1개월"> 1주일 ~ 1개월
+                                            <input class="form-check-input" type = "radio" name = "subject" value = "1주일이하"> 1주일이하
+                                            <input class="form-check-input" type = "radio" name = "subject" value = "1일"> 1일
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3"> <!--필수입력/ working_days-->
+                                    <label class="col-form-label col-sm-2 pt-0">근무요일</label>
+                                    <div class="col-sm-10">
+                                        <div>
+                                            <input class="form-check-input" type = "checkbox" name = "subject" value = "appia1"> 월
+                                            <input class="form-check-input" type = "checkbox" name = "subject" value = "appia2"> 화
+                                            <input class="form-check-input" type = "checkbox" name = "subject" value = "appia3"> 수
+                                            <input class="form-check-input" type = "checkbox" name = "subject" value = "appia1"> 목
+                                            <input class="form-check-input" type = "checkbox" name = "subject" value = "appia2"> 금
+                                            <input class="form-check-input" type = "checkbox" name = "subject" value = "appia3"> 토
+                                            <input class="form-check-input" type = "checkbox" name = "subject" value = "appia3"> 일
+                                        </div>
+                                        <div>
+                                            <input class="form-check-input" type = "checkbox" name = "subject" value = "appia1"> 협의가능
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3"> <!--필수입력/ salary-->
+                                    <label class="col-sm-2 col-form-label pt-0"  >급여</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>선택하기</option>
                                         </select>
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Submit Button</label>
+                                <div class="row mb-3"> <!--필수입력/ business_type-->
+                                    <label class="col-form-label col-sm-2 pt-0">입력완료</label>
                                     <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-primary">Submit Form</button>
+                                        <button type="submit" class="btn btn-primary">입력완료</button>
                                     </div>
                                 </div>
-
                             </form><!-- End General Form Elements -->
-
                         </div>
                     </div>
 
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-12">
 
                     <div class="card">
                         <div class="card-body">
@@ -337,4 +272,3 @@
     </section>
 
 </main><!-- End #main -->
-

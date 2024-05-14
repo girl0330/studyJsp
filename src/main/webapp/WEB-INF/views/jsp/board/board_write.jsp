@@ -110,10 +110,6 @@
                                 <label for="content" class="form-label">내용</label>
                                 <input type="text" class="form-control" id="content" name="content" data-name="내용">
                             </div>
-<%--                            <div class="col-12">--%>
-<%--                                <label for="systemRegistrarId" class="form-label">작성자</label>--%>
-<%--                                <input type="text" class="form-control" id="systemRegistrarId" name="systemRegistrarId" data-name="작성자">--%>
-<%--                            </div>--%>
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary" id="button_insert" name="button_insert">등록</button>
                                 <button type="button" class="btn btn-secondary" id="button_textHold" name="button_textHold">임시저장</button>
