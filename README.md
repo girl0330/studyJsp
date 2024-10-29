@@ -13,6 +13,7 @@
 
 ### 🔍채택한 개발 기술과 
 ---
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ##### Back end : java, spring, dbeaver
 
 
