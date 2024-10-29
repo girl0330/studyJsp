@@ -2,6 +2,8 @@
 ---
 ##### jsp를 이용한 프로젝트를 만들어보면서 jsp를 익히는 과정을 담는 프로젝트가 될 예정이다.
 
+---
+### 🛠️Architecture
 
 ### ✏️개발 환경
 ---
@@ -13,14 +15,15 @@
 
 ### 🔍채택한 개발 기술과 
 ---
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+ ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+ ![SpringBoot](https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+ ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
+ ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+ ![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+
+
 ##### Back end : java, spring, dbeaver
 
 
-##### Front end :
 
 
-##### Framework / Library : SpringFramework, Mybatis
-
-
-### 🛠️트러블 이슈-해결
