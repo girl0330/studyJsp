@@ -5,7 +5,7 @@
 ---
 ### 🛠️Architecture
 -erd
-<img src="C:\Users\genius\Desktop\플로우 차트\Copy of job_dashboard.png" style="max-width: 100%;" alt="erd"></img><br/>
+
 
 ### ✏️개발 환경
 ---
