@@ -5,7 +5,7 @@
 ---
 ### 🛠️Architecture
 -erd
-
+![Copy of job_dashboard](https://github.com/user-attachments/assets/3d90d9da-439c-48b6-8e59-00c6d3a13fa1)
 
 ### ✏️개발 환경
 ---
